@@ -46,22 +46,22 @@ namespace Laba4
             {
                 case ConsoleKey.D1:
                     Console.Clear();
-                    ExOne.Run();
+                    ExOne.Run_one();
                     break;
 
                 case ConsoleKey.D2:
                     Console.Clear();
-                    ExTwo.Run();
+                    ExTwo.Run_two();
                     break;
 
                 case ConsoleKey.D3:
                     Console.Clear();
-                    TimeProgram.Difference_main(Text.CurrentLang);
+                    Additional.Run_additional();
                     break;
 
                 case ConsoleKey.D4:
                     Console.Clear();
-                    TextProcessing.Run();
+                    TextProcessing.Run_textprocessing();
                     break;
 
                 case ConsoleKey.Q:
