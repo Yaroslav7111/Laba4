@@ -3,7 +3,6 @@ namespace Laba4
 {
     public static class Dop_Time
     {
-        
         static string[] parts ;
         public static string path = "/home/yarolav/CSharpProjects/Laba4/Laba4/plan.txt";
         static ConsoleKey [] key = new ConsoleKey[] 
@@ -15,6 +14,9 @@ namespace Laba4
         ConsoleKey.Y, 
         ConsoleKey.U, 
         ConsoleKey.I };
+        // Эту фукцию так назвал 
+        // И бо я уже за******ся придумывать названия для функций
+        // И переписывать код в 14 РАЗ 
         public static void Shiza()
         {
              
@@ -44,6 +46,9 @@ namespace Laba4
         {
             Console.Clear();
             int count = 0;
+            // а тут инетресно , мне Давид придевил что код не будет оптимезирован , 
+            // потому-что я что бы указать размер массива написал одельную функцию 
+            // и это действиьельно не оптимально , но я так сделал для того , чтобы не создавать кучу переменных и массивов ,
             List<string> lesson = new List<string>();
             List<string> type_lesson = new List<string>();
             Lessons_count(out count, out lesson, out type_lesson);
@@ -53,6 +58,8 @@ namespace Laba4
                     Text.P("Because it's a day off ");
 
             } 
+            // Блин чай хлебнул а он оказался гарячим , и я сильно обжегся ,
+            //  и я не могу нормально писать код, веном 
             else if (count == 1)
             {
                 Text.P(
@@ -82,7 +89,7 @@ namespace Laba4
                 Choose_less(out first_less, count);
                 Text.P("Second lesson" + ":");
                 Choose_less(out second_less, count);
-                /*Якщо людина вибрала першу пару останню , а не навпаки */
+                /*Якщо людина вибрала першу пару останню , а не навпаки  */
                 if (first_less[0] > second_less[0])
                 {
                     string temp = first_less;
@@ -136,13 +143,14 @@ namespace Laba4
 
                 foreach (string line in File.ReadLines(path))
                 {
+                    // Пропускаем пустые строки 
+                    //Да , я пишу коментари для того чтобы МНЕ В БУДУШЕМ БФЛО ПОНЯТНО 
                     if (string.IsNullOrWhiteSpace(line))
                         continue;
-
+                    //Split - этот метод разделяет строку на части, 
+                    // используя указанный разделитель (в данном случае '|') и возвращает массив строк.
                     parts = line.Split('|');
-                    if (parts.Length < 6 || parts[0].Trim() != today)
-                        continue;
-
+                    //Trim - этот метод удаляет все начальные и конечные пробелы из строки... веном  
                     events.Add(parts[1].Trim());
 
                     string startTime = parts[4].Trim();
@@ -151,14 +159,15 @@ namespace Laba4
                     time_events.Add($"{startTime} - {endTime}");
                 }
             }
-     
+        // Эта функция для того , чтобы перевести время в секундах в нормальный формат ,
+        // И вывести его в виде строки , например 1 час 20 минут 30 секунд
         static void Time(Time time, int res, out string str_res)
         {
             time.hour = res / 3600;
             res %= 3600;
             time.min = res / 60;
             time.sec = res % 60;
-
+           //  ( -_-)       
             if (time.hour == 0)
             {
                 str_res = $"{time.min:D1}"+ " minutes:" + $"{time.sec:D2}"+ " seconds";
@@ -186,9 +195,11 @@ namespace Laba4
                     continue;
 
                 parts = line.Split('|');
-                if (parts.Length < 6 || parts[0].Trim() != today)
-                    continue;
-
+                /* хотя зачем тут Trim я не знаю , но пусть будет , может пригодится в будущем
+                Ну на сдучей если какой-то Власыч-колбасыч придерётся, шо код не оптимальный , 
+                то я ему скажу , что это для того , чтобы не было проблем с пробелами в файле , 
+                 и вообще я так хочу , а ты кто по жизни , 
+                 чтобы мне указывать как писать код? */
                 string type = parts[3].Trim();
                 if (type != "lecture" && type != "practice" && type != "seminar")
                     continue;
@@ -230,7 +241,7 @@ namespace Laba4
             foreach (string line in File.ReadLines(path))
             {
                 parts = line.Split('|');
-                if (parts.Length >= 6 && parts[0].Trim() == today && parts[2].Trim() == less)
+                if (parts[0].Trim() == today && parts[2].Trim() == less)
                 {
                     str_time = parts[4].Trim();
                     break;
@@ -247,6 +258,12 @@ namespace Laba4
             foreach (var part in dayParts)
             {
                 // обычный диапазон
+                /*
+                Если час больше или равен началу и меньше конца, то это текущая часть дня
+                Например, если час 10, то он больше или равен 6 (начало утра) и меньше 12 (конец утра), значит это утро
+                 А кто-то шарит за Вархамер 40к ? 
+                 Не так и думал (- - )
+                */
                 if (part.start < part.end)
                 {
                     if (hour >= part.start && hour < part.end)
@@ -255,6 +272,8 @@ namespace Laba4
                 // через полночь
                 else
                 {
+                    // Если час больше или равен началу и меньше конца, то это текущая часть дня
+                    // Например, если час 23, то он больше или равен 21 (начало ночи) и меньше 24 (конец ночи), значит это ночь
                     if (hour >= part.start || hour < part.end)
                         return Text.TranslateText(part.name);
                 }

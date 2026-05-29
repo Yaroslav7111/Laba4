@@ -4,10 +4,18 @@
 namespace Laba4{
 class TimeProgram
 {
+    /*це змінна для поточного часу, 
+     яка буде оновлюватися в окремому потоці, 
+     щоб відображати поточний час з урахуванням зміщення, 
+     яке може бути змінено користувачем через меню*/
 public static Thread? clockThread;
 public static bool running = true;
 public static bool runningClock = true;
 public static string currentDay;
+// Це змінна для зберігання поточного часу, 
+// яка буде оновлюватися в окремому потоці, 
+// щоб відображати поточний час з урахуванням зміщення, 
+// яке може бути змінено користувачем через меню
 public static MyTime now;
 // Зміщення часу в секундах від реального часу, яке можна змінювати через меню
 public static int offsetSeconds = 0;
