@@ -76,26 +76,7 @@ public static void secondMain()
     }
 public static void Clock()
 {
-    // коротко говаря что тут за колбасня творится  
-    /*пофакту метод работает пока runningClock = true, если что runningClock глобальный 
-     для вас Юлия Евгеньевна , я сделаю вид что это не написал ии не знаю что это значит*/
 
-    /*Пояснение для Власыча: Этот метод запускается в отдельном потоке и работает в бесконечном цикле(поеа я этого хочу), 
-    который продолжается, пока переменная runningClock равна true. 
-    Внутри цикла он получает текущее время с учетом смещения offsetSeconds, 
-    форматирует его в строку и отображает на экране. 
-    Каждую секунду он обновляет строку с текущим временем и днем недел
-    и, используя Console.SetCursorPosition(примечание SetCursorPosition это метод блягадаря каторыму мы можем указать в каком месте будет выводится инфа в терменал 
-    и я устал уже писать...) для того, чтобы перезаписать предыдущую строку времени. 
-    Когда пользователь входит в меню изменения времени, переменная runningClock устанавливается в false, 
-    что останавливает обновление времени, и после выхода из меню снова устанавливается в true, 
-    чтобы продолжить обновление времени. Таким образом, этот метод обеспечивает 
-    динамическое отображение текущего времени и дня недели на экране, 
-    учитывая любые изменения времени, внесенные пользователем через меню. 
-    Важно отметить, что этот метод работает в отдельном потоке, что позволяет ему обновлять время независимо от основного потока, 
-    который обрабатывает пользовательский ввод. Это обеспечивает плавное отображение времени без блокировки интерфейса пользователя.
-    Так что не знаю где тут может быть проблема, и балы ты не заработаеш тут(сделал сигма лицо , и провёл своим пальчиком по челюсти оформив сочнейший мюнинг)
-    */
     while (runningClock)
     {
         // Получаем реальное время с учетом смещения
@@ -111,17 +92,7 @@ public static void Clock()
             $"{Text.TranslateText("Now is the time:")} {MyTimeToString(now)} | {GetDayOfWeek(lang)}";
 
         Console.SetCursorPosition(clockX, clockY);
-        // Выводим строку с текущим временем и днем недели, перезаписывая предыдущую строку
-        //благодоря тому что мы используем SetCursorPosition, мы можем перезаписывать строку с временем, не создавая новые строки 
-        // в консоли, что позволяет нам динамически обновлять отображение времени без засорения консоли.
-        //таким образом програма не засирает консоль новыми строками, 
-        // а просто обновляет существующую строку с временем, ч
-        // то обеспечивает более чистый и удобный интерфейс для пользователя
-        // и код становится более оптимезированым и более маштабируймым(Лично для тебя сделал Давид, так что не говори что я не стараюсь)
-        //
-        Console.Write(timeText.PadRight(50));
-        // Ждем одну секунду перед следующим обновлением
-        /*Да это мне посаоветовалал сдлеать ИИ признаюсь и каюсь */
+       Console.Write(timeText.PadRight(50));
         Thread.Sleep(1000);
     }
 }
@@ -155,7 +126,7 @@ public static void ChangeTimeMenu()
     так что будьте добрее и сделайте вид, что не читаете этот текст и не видите проблему :)
     */
     /*P.S. (Для Власыча)
-        Знай я знаю где ты живешь , знаю когда ты дома , знаю когда ты спишь , я бы уже давно дал тебе повестку и заташил бы в чорный бусик, 
+        Знай! Я знаю где ты живешь , знаю когда ты дома , знаю когда ты спишь , я бы уже давно дал тебе повестку и заташил бы в чорный бусик, 
          но я не хочу проблем с законом , так что будь добрее и не трогай меня)
     */ 
 
@@ -352,7 +323,7 @@ public static int Difference(int sec1 , int sec2 , out int result)
     result = sec2 - sec1;  
     return result;
 }
-public static void Difference_main(string lang )
+public static void Difference_main()
     {
         Console.Clear();
         Text.P(
@@ -362,8 +333,7 @@ public static void Difference_main(string lang )
     "3. Exit to main menu (R)"
     );
  
-
-       ConsoleKeyInfo key = Console.ReadKey(true);
+    ConsoleKeyInfo key = Console.ReadKey(true);
     if (key.Key == ConsoleKey.Q)
     {
      Console.Clear();
@@ -379,16 +349,75 @@ public static void Difference_main(string lang )
     else if (key.Key == ConsoleKey.R)
     {
     Console.Clear();
-    Console.WriteLine(Translate("You pressed", lang) + " R");
+    Text.P("You pressed") + " R";
    }
 }
-
-public static string WhatLesson(MyTime t )
+public static void WhatLesson(MyTime t)
 {
-    return "";
+    /* Формат plan.txt: День|Назва|Номер пари|Тип|Початок|Кінець */
+    bool hasLessonsToday = false;
+    bool isNowLesson = false;
+
+    string today = DateTime.Now.AddSeconds(offsetSeconds).DayOfWeek.ToString();
+
+    foreach (string line in File.ReadLines(Dop_Time.path))
+    {
+        if (string.IsNullOrWhiteSpace(line))
+            continue;
+
+        string[] parts = line.Split('|');
+         // Якщо день у рядку не відповідає поточному дню, пропускаємо цей рядок і переходимо до наступного
+        if (parts[0] != currentDay)
+            continue;
+
+
+        string type = parts[3].Trim();
+        if (type != "lecture" && type != "practice" && type != "seminar")
+            continue;
+
+        hasLessonsToday = true;
+
+        MyTime start = ParseTime(parts[4].Trim());
+        MyTime end = ParseTime(parts[5].Trim());
+
+        if (IsTimeInRange(t, start, end))
+        {
+            Text.P($"Now is lesson: {type}, {parts[1].Trim()}");
+            isNowLesson = true;
+            break;
+        }
+    }
+
+    if (!hasLessonsToday)
+    {
+        Text.P("Today have no lessons");
+    }
+    else if (!isNowLesson)
+    {
+        Text.P("Now there are no lessons");
+    }
 }
+public static MyTime ParseTime(string timeStr)
+{
+    string[] parts = timeStr.Split(':');
+    return (
+        int.Parse(parts[0]),
+        int.Parse(parts[1]),
+        int.Parse(parts[2])
+    );
+}
+static bool IsTimeInRange(MyTime t, MyTime start, MyTime end)
+{
+    int tSec = ToSecSinceMidnight(t);
+    int startSec = ToSecSinceMidnight(start);
+    int endSec = ToSecSinceMidnight(end);
+
+    return tSec >= startSec && tSec < endSec;
+}
+// Этот метод получает текущий день недели с учетом смещения времени, которое может быть изменено пользователем через меню.
 public static string GetDayOfWeek()
 {
+    // Получаем реальное время с учетом смещения
     DateTime realTime = DateTime.Now.AddSeconds(offsetSeconds);
     DayOfWeek day = realTime.DayOfWeek;
 

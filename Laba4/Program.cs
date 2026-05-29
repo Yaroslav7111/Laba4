@@ -18,7 +18,7 @@ namespace Laba4
             }
 
             Text.CurrentLang = lang;
-
+            //Да да while (true) :)  
             while (true)
             {
                 ShowMenu();

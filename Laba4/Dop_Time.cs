@@ -4,9 +4,17 @@ namespace Laba4
     public static class Dop_Time
     {
         
-        static string day = TimeProgram.GetDayOfWeek();
-        static string[] parts = line.Split('|');
+        static string[] parts ;
         public static string path = "/home/yarolav/CSharpProjects/Laba4/Laba4/plan.txt";
+        static ConsoleKey [] key = new ConsoleKey[] 
+        { ConsoleKey.Q, 
+        ConsoleKey.W, 
+        ConsoleKey.E, 
+        ConsoleKey.R, 
+        ConsoleKey.T, 
+        ConsoleKey.Y, 
+        ConsoleKey.U, 
+        ConsoleKey.I };
         public static void Shiza()
         {
              
@@ -36,8 +44,8 @@ namespace Laba4
         {
             Console.Clear();
             int count = 0;
-            string [] lesson;
-            string [] type_lesson;
+            List<string> lesson = new List<string>();
+            List<string> type_lesson = new List<string>();
             Lessons_count(out count, out lesson, out type_lesson);
             if (count == 0)
             {
@@ -45,22 +53,28 @@ namespace Laba4
                     Text.P("Because it's a day off ");
 
             } 
-            if (count == 1)
+            else if (count == 1)
             {
                 Text.P(
                     Text.TranslateText("Today only one lesson\n")+
                     Text.TranslateText("You cann`t calculate the time between classes during the day. ")
                     );
             }
-            if (count > 2)
+            else if (count >= 2)
             {
-                Text.P(Text.TranslateText("Today lesson")+":");
-                for (int i = 1; i < count ; i++)
-                {
-                   Text.P($"{i}" + Text.TranslateText("Lesson") +", "+ Text.TranslateText("subject")+": "+Text.TranslateText(lesson[i-1])+
-                   Text.TranslateText("lesson type") + ": " + Text.TranslateText(type_lesson[i-1])
-                   ); 
-                } 
+                Text.P(Text.TranslateText("Today lesson") + ":");
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        Text.P(
+                            $"{i + 1} " +
+                            Text.TranslateText("Lesson") + ", " +
+                            Text.TranslateText("subject") + ": " +
+                            Text.TranslateText(lesson[i]) + ", " +
+                            Text.TranslateText("lesson type") + ": " +
+                            Text.TranslateText(type_lesson[i])
+                        );
+                    }
                 Text.P(Text.TranslateText("Choose")+ ":");
                 string first_less= "";
                 string second_less= "";
@@ -69,12 +83,11 @@ namespace Laba4
                 Text.P("Second lesson" + ":");
                 Choose_less(out second_less, count);
                 /*Якщо людина вибрала першу пару останню , а не навпаки */
-                if (first_less[0] < second_less[0])
+                if (first_less[0] > second_less[0])
                 {
-                    string temp = "";
-                    temp = first_less;
-                    second_less = first_less;
-                    first_less = temp;
+                    string temp = first_less;
+                    first_less = second_less;
+                    second_less = temp;
                 }
                 else if (first_less[0] == second_less[0])
                 {
@@ -84,14 +97,14 @@ namespace Laba4
                     Choose_less(out first_less, count);
                     Choose_less(out second_less, count);
                 }
-                int one_day = "";
-                int two_day = "";
+                int one_day = 0;
+                int two_day = 0;
                 Need_time(first_less, out one_day);
                 Need_time(second_less, out two_day);
                 int res= 0 ; 
                 TimeProgram.Difference(one_day,two_day,out res);
                 string str_res = "";
-                Time(res,out str_res);
+                Time(default, res, out str_res);
                 Text.P(Text.TranslateText("Time between classes")+": "+ str_res);
                 Text.P(Text.TranslateText("Press any key to back"));
                 Console.ReadKey();
@@ -104,56 +117,55 @@ namespace Laba4
         {
            Console.Clear();
            Text.P(Text.TranslateText("Choose the event"));
-           string [] events; 
-           string [] time_events;
-           string [] time_part;
-           int count = 0;
-           Count_the_day(day,out count);
-           Big_Boss(day,out events,out time_events,out time_part);
+           string today = GetToday();
+           Big_Boss(today, out List<string> events, out List<string> time_events);
+           for (int i = 0; i < events.Count; i++)
+           {
+               Text.P($"{i + 1}. {Text.TranslateText(events[i])} ({time_events[i]})");
+           }
+           Text.P(Text.TranslateText("Press any key to back"));
+           Console.ReadKey();
+           Console.Clear();
+           Shiza();
         }
-        static ConsoleKey [] key = new ConsoleKey[] { ConsoleKey.Q, ConsoleKey.W, ConsoleKey.E, ConsoleKey.R, ConsoleKey.T, ConsoleKey.Y, ConsoleKey.U, ConsoleKey.I };
         //Так Кутузов ця функція для щоб знайти дії , які відбувается за день  
-        static void Big_Boss(out string[] events, out string[] time_events, out string[] time_part)
-        {
-            events = new string[count];
-            time_events = new string[count];
-            time_part = new string[count];
-            int temp = 0;
-            foreach (string line in File.ReadLines(path))
+        static void Big_Boss(string today, out List<string> events, out List<string> time_events)
             {
-                if(parts[0]== day);
-            }
-            }
-        static void Count_the_day(out int count)
-        {
-            foreach (string line in File.ReadLines(path))
-            {
-                
-                while(parts[0]== day)   
+                events = new List<string>();
+                time_events = new List<string>();
+
+                foreach (string line in File.ReadLines(path))
                 {
-                    count++;
-                    
-                }   
+                    if (string.IsNullOrWhiteSpace(line))
+                        continue;
+
+                    parts = line.Split('|');
+                    if (parts.Length < 6 || parts[0].Trim() != today)
+                        continue;
+
+                    events.Add(parts[1].Trim());
+
+                    string startTime = parts[4].Trim();
+                    string endTime = parts[5].Trim();
+
+                    time_events.Add($"{startTime} - {endTime}");
+                }
             }
-        }
+     
         static void Time(Time time, int res, out string str_res)
         {
             time.hour = res / 3600;
-            if (time.hour > 0)
-            {
-                res = res - time.hour * 3600;
-            }
-            int min = res % 3600 ;
-            min = min / 60;
-            int sec = res % 60;
+            res %= 3600;
+            time.min = res / 60;
+            time.sec = res % 60;
 
             if (time.hour == 0)
             {
-                str_res = $"{min:D1}"+ " minutes:" + $"{sec:D2}"+ " seconds";
+                str_res = $"{time.min:D1}"+ " minutes:" + $"{time.sec:D2}"+ " seconds";
             }
             else if (time.min == 0)
             {
-                str_res = $"{sec:D1}"+ " seconds";
+                str_res = $"{time.sec:D1}"+ " seconds";
             } 
             else
             str_res = $"{time.hour:D1}"+ Text.TranslateText(" hours") + $"{time.min:D2}"+ 
@@ -161,23 +173,29 @@ namespace Laba4
         }
         static void Lessons_count(
         out int count,
-        out string [] lesson, 
-        out string [] type_lesson )
+        out List<string> lesson, 
+        out List<string> type_lesson )
         {
-
+            lesson = new List<string>();
+            type_lesson = new List<string>();
             count = 0;
-            int temp = -1;
+            string today = GetToday();
             foreach (string line in File.ReadLines(path))
             {
-                if (Text.TranslateText(parts[0]) == day && Text.TranslateText(parts[2]) == Text.TranslateText(practice) ||
-                   Text.TranslateText(parts[2]) == Text.TranslateText(lecture) ||Text.TranslateText(parts[2]) == Text.TranslateText(seminar)
-                )
-                {
-                    temp++;
-                    count++;
-                    lesson[temp] = parts[1];
-                    type_lesson[temp] = parts[3]; 
-                }
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                parts = line.Split('|');
+                if (parts.Length < 6 || parts[0].Trim() != today)
+                    continue;
+
+                string type = parts[3].Trim();
+                if (type != "lecture" && type != "practice" && type != "seminar")
+                    continue;
+
+                count++;
+                lesson.Add(parts[1].Trim());
+                type_lesson.Add(type);
             }  
         }
     
@@ -192,45 +210,57 @@ namespace Laba4
             sum = time.hour * 3600 + time.min * 60 + time.sec;
         }
        
-        static void Choose_less(out string less , int count,key[] keys)
+        static void Choose_less(out string less , int count)
         {
-             
-            for (int i = 0; i < count; i++)
-                {
-                    lessons[keys[i]] = Text.TranslateText("Lesson")+ $"{i + 1}";
-                    Text.P($"{keys[i]} -"+ "Lesson"+ " {i + 1}");
-                }
+            less = "";
+            for (int i = 0; i < count && i < key.Length; i++)
+            {
+                Text.P($"{key[i]} - {Text.TranslateText("Lesson")} {i + 1}");
+            }
 
-                ConsoleKeyInfo key = Console.ReadKey(true);
-                
-                if (lessons.ContainsKey(key.Key))
-                {
-                    less = lessons[key.Key];
-                }
+            ConsoleKeyInfo pressed = Console.ReadKey(true);
+            int index = pressed.Key - ConsoleKey.Q;
+            if (index >= 0 && index < count)
+                less = $"{index + 1} lesson";
         }
-        static void Need_time( string less,string str_time, out int time)
+        static void Need_time(string less, out int time)
         {
+            string str_time = "";
+            string today = GetToday();
             foreach (string line in File.ReadLines(path))
             {
-                if(parts[0]==day && parts[2]== less)
+                parts = line.Split('|');
+                if (parts.Length >= 6 && parts[0].Trim() == today && parts[2].Trim() == less)
                 {
-                    str_time = parts[4];
-                } 
+                    str_time = parts[4].Trim();
+                    break;
+                }
             }
-            ConvertInSec(new Time(), str_time, out time);
-
+            ConvertInSec(default, str_time, out time);
         }
-         /*Ця функція для того , щоб можно було зрозоміти в який час відбуватеся подія, точніш в який пробіжутку дня... 
-         А хотя хз , я возможно удалю цю функцію */
-        static string GetDayPart(string lang, int start, int end)
+         //Ця функція для того , щоб можно було зрозоміти в який час відбуватеся подія, точніш в який пробіжутку дня...
+         //Наприклад , якщо подія відбувається в 5 годин ранку , то це буде "Early morning" , якщо в 14 годин , то це буде "Afternoon" і так далі
+         //хз для чого це я пішу , але мені здається це буде цікаво і корисно для когось , хто буде читати цей код
+         // Слава Імператору  
+       static string GetDayPart(int hour)
         {
             foreach (var part in dayParts)
+            {
+                // обычный диапазон
+                if (part.start < part.end)
                 {
                     if (hour >= part.start && hour < part.end)
-                    {
                         return Text.TranslateText(part.name);
-                    }
                 }
+                // через полночь
+                else
+                {
+                    if (hour >= part.start || hour < part.end)
+                        return Text.TranslateText(part.name);
+                }
+            }
+
+            return "Unknown";
         }
          static Dictionary<ConsoleKey, string> lessons = new Dictionary<ConsoleKey, string >()
         {
@@ -243,6 +273,14 @@ namespace Laba4
             { ConsoleKey.U, "7 lesson" },
             { ConsoleKey.I, "8 lesson" }
         };
+        /*Коротко говоря это массив в котором хранятся временные промежутки дня , 
+        и используются кортеж начало и конец 
+        я это сделал для того если событее происходит в разных промижутках дня , 
+        то можно было понять в какой части дня происходит событие ,
+         а не просто знать время , например 5 часов утра , а так будет понятно что это 
+         "Early morning". 
+         А кортеж я использовал для того , чтобы было удобно хранить эти промежутки и не создавать кучу переменных...Ауф!
+        */
        static (int start, int end, string name)[] dayParts =
     {
         (0, 4, "Midnight"),
@@ -253,5 +291,16 @@ namespace Laba4
         (17, 21, "Evening"),
         (21, 24, "Night") 
     };
+    static string GetToday()
+    {
+        return DateTime.Now.AddSeconds(TimeProgram.offsetSeconds).DayOfWeek.ToString();
+    }
+
+    //Жестко ,с характером ,как мужчина,это функция парсирует
+    static int ParseHour(string time)
+    {
+        var parts = time.Split(':');
+        return int.Parse(parts[0]);
+    }
     }
 }

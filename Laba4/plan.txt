@@ -99,7 +99,7 @@ Saturday|lunch| |meal|12:30:01|13:00:00
 Saturday|rest| |free time|13:00:01|14:30:00
 Saturday|free time| |free time|14:30:01|18:00:00
 Saturday|dinner| |meal|18:00:01|18:30:00
-Saturday|relax / hobbies| |free time|18:30:01|21:30:00
+Saturday|relax | |free time|18:30:01|21:30:00
 Saturday|getting ready for bed| |free time|21:30:01|21:59:59
 Saturday|sleep| |free time|22:00:00|23:59:59
 

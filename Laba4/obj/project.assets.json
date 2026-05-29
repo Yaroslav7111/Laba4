@@ -8,7 +8,7 @@
     "net10.0": []
   },
   "packageFolders": {
-    "/tmp/cursor-sandbox-cache/d6c879f379cc934ee29a256eb3a693f8/nuget": {}
+    "/tmp/cursor-sandbox-cache/29da8dffa428ea6f0d62f43c03d8d701/nuget": {}
   },
   "project": {
     "version": "1.0.0",
@@ -16,7 +16,7 @@
       "projectUniqueName": "/home/yarolav/CSharpProjects/Laba4/Laba4/Laba4.csproj",
       "projectName": "Laba4",
       "projectPath": "/home/yarolav/CSharpProjects/Laba4/Laba4/Laba4.csproj",
-      "packagesPath": "/tmp/cursor-sandbox-cache/d6c879f379cc934ee29a256eb3a693f8/nuget",
+      "packagesPath": "/tmp/cursor-sandbox-cache/29da8dffa428ea6f0d62f43c03d8d701/nuget",
       "outputPath": "/home/yarolav/CSharpProjects/Laba4/Laba4/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [

@@ -4,8 +4,7 @@ namespace Laba4
     {
         public static void Run_additional()
         {
-            Text.P("This is the additional task. Here you can perform various additional operations.");
-            Dop_Time.Shiza();
+            Text.P("This is the additional task. Here you can perform various additional operatio");
         }
     }
 }
