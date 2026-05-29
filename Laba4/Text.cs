@@ -14,7 +14,7 @@ namespace Laba4
         {
             Console.WriteLine(TranslateText(text));
         }
-        public static PLine(string text)
+        public static void PLine(string text)
         {
             Console.Write(TranslateText(text));
         }
