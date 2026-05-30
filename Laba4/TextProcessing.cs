@@ -19,17 +19,13 @@ namespace Laba4
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
-                        Text.P("Editing the student's file is not implemented yet.");
-                        Text.P("Press any key to return...");
-                        Console.ReadKey(true);
+                        Student_edit.Edit_student_file();
                         break;
 
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
                         Console.Clear();
                         Add_new_file.User_Input();
-                        Text.P("Press any key to return...");
-                        Console.ReadKey(true);
                         break;
 
                     case ConsoleKey.D3:
@@ -39,8 +35,9 @@ namespace Laba4
                         return;
 
                     default:
+                        Console.Clear();
                         Text.P("Invalid choice. Please try again.");
-                        Console.ReadKey(true);
+                        Run_textprocessing(); 
                         break;
                 }
             }
