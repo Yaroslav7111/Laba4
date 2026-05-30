@@ -1,7 +1,13 @@
-﻿using MyTime = (int hour, int min, int sec);
+using MyTime = (int hour, int min, int sec);
 
 
-namespace Laba4{
+namespace Laba4
+{
+public static class ExOne
+{
+    public static void Run_one() => TimeProgram.Run_one();
+}
+
 class TimeProgram
 {
     /*це змінна для поточного часу, 
@@ -11,7 +17,7 @@ class TimeProgram
 public static Thread? clockThread;
 public static bool running = true;
 public static bool runningClock = true;
-public static string currentDay;
+public static string currentDay = DateTime.Now.DayOfWeek.ToString();
 // Це змінна для зберігання поточного часу, 
 // яка буде оновлюватися в окремому потоці, 
 // щоб відображати поточний час з урахуванням зміщення, 
@@ -24,8 +30,12 @@ static int clockY = 7;
 static int menuY = 8;
 
 
-static void Run_one()
+public static void Run_one()
 {
+    running = true;
+    runningClock = true;
+    clockY = 7;
+    menuY = 8;
     Text.P("Hello! This program will help you to know your schedule and the current time.");
     secondMain();
 }
@@ -65,12 +75,12 @@ public static void secondMain()
     }
     else if (key.Key == ConsoleKey.W)
     {
-        Text.P("You pressed W");
+        WhatLesson(now);
     }
     else if (key.Key == ConsoleKey.E)
     {
         runningClock = false;
-        Difference_main(lang);
+        Difference_main();
         runningClock = true;
     }
     else if (key.Key == ConsoleKey.R)
@@ -97,7 +107,7 @@ public static void Clock()
         );
         // Форматируем строку с текущим временем и днем недели(после этих слов сделал мюнинг)
         string timeText =
-            $"{Text.TranslateText("Now is the time:")} {MyTimeToString(now)} | {GetDayOfWeek(lang)}";
+            $"{Text.TranslateText("Now is the time:")} {MyTimeToString(now)} | {GetDayOfWeek()}";
 
         Console.SetCursorPosition(clockX, clockY);
        Console.Write(timeText.PadRight(50));
@@ -350,14 +360,12 @@ public static void Difference_main()
     else if (key.Key == ConsoleKey.W)
     {
      Console.Clear();
-     clockY = 1;
-     menuY = 2;
-     Difference_main( );
+     Text.P("This option is not implemented yet.");
     }
     else if (key.Key == ConsoleKey.R)
     {
     Console.Clear();
-    Text.P("You pressed") + " R";
+    Text.P("You pressed R");
    }
 }
 public static void WhatLesson(MyTime t)
@@ -375,7 +383,7 @@ public static void WhatLesson(MyTime t)
 
         string[] parts = line.Split('|');
          // Якщо день у рядку не відповідає поточному дню, пропускаємо цей рядок і переходимо до наступного
-        if (parts[0] != currentDay)
+        if (parts[0].Trim() != currentDay)
             continue;
 
 
@@ -431,10 +439,8 @@ public static string GetDayOfWeek()
 
     string key = day.ToString(); // Monday, Tuesday...
 
-    string result = Text.TranslateText(key);
-
-    currentDay = result;
-    return result;
+    currentDay = key;
+    return Text.TranslateText(key);
 }
 }
 }
