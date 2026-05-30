@@ -1,0 +1,21 @@
+{
+  "Name": "\u0412\u0438\u0442\u0430\u043B\u044F",
+  "Surname": "\u0413\u0443\u0431\u0430",
+  "Gender": "Male",
+  "Age": 75,
+  "Course": "1",
+  "Group": "\u041A\u041D-25",
+  "Grades": {
+    "Math I": 78,
+    "Physics I": 54,
+    "Programming Basics": 86,
+    "English": 23,
+    "History": 67,
+    "Discrete Math": 34
+  },
+  "AverageGrade": 0,
+  "StudyType": "Budget",
+  "Scholarship": 0,
+  "CanEdit": false,
+  "Password": ""
+}

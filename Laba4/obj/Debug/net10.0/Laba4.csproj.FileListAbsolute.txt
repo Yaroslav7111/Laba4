@@ -13,3 +13,4 @@
 /home/yarolav/CSharpProjects/Laba4/Laba4/obj/Debug/net10.0/Laba4.genruntimeconfig.cache
 /home/yarolav/CSharpProjects/Laba4/Laba4/obj/Debug/net10.0/ref/Laba4.dll
 /home/yarolav/CSharpProjects/Laba4/Laba4/obj/Debug/net10.0/Laba4.sourcelink.json
+/home/yarolav/CSharpProjects/Laba4/Laba4/bin/Debug/net10.0/plan.txt

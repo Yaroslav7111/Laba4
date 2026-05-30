@@ -82,11 +82,5 @@ namespace Laba4
                     };
             }
         }
-
-
-        public void CalculateAverage()
-        {
-            AverageGrade = Grades.Count == 0 ? 0 : Grades.Values.Average();
-        }
     }
 }

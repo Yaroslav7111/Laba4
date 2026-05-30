@@ -6,10 +6,10 @@ namespace Laba4
         {
             if (grades == null || grades.Count == 0)
                 return 0;
-
+             // Проверяем, есть ли оценки ниже 60. Если есть, то средний балл считается 0, так как студент не сдал предмет.
             if (grades.Values.Any(grade => grade < 60))
                 return 0;
-
+             // Если все оценки 60 и выше, то вычисляем средний балл как обычно, используя метод Average() для коллекции оценок.
             return grades.Values.Average();
         }
 
