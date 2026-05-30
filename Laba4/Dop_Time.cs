@@ -4,7 +4,7 @@ namespace Laba4
     public static class Dop_Time
     {
         static string[] parts ;
-        public static string path = "/home/yarolav/CSharpProjects/Laba4/Laba4/plan.txt";
+        public static string path = Path.Combine(AppContext.BaseDirectory, "plan.txt");
         static ConsoleKey [] key = new ConsoleKey[] 
         { ConsoleKey.Q, 
         ConsoleKey.W, 
@@ -150,6 +150,8 @@ namespace Laba4
                     //Split - этот метод разделяет строку на части, 
                     // используя указанный разделитель (в данном случае '|') и возвращает массив строк.
                     parts = line.Split('|');
+                    if (parts.Length < 6 || parts[0].Trim() != today)
+                        continue;
                     //Trim - этот метод удаляет все начальные и конечные пробелы из строки... веном  
                     events.Add(parts[1].Trim());
 
@@ -170,15 +172,13 @@ namespace Laba4
            //  ( -_-)       
             if (time.hour == 0)
             {
-                str_res = $"{time.min:D1}"+ " minutes:" + $"{time.sec:D2}"+ " seconds";
+                str_res = $"{time.min:D1}" + Text.TranslateText(" minutes") + " " + $"{time.sec:D2}" + Text.TranslateText(" seconds");
             }
-            else if (time.min == 0)
-            {
-                str_res = $"{time.sec:D1}"+ " seconds";
-            } 
             else
-            str_res = $"{time.hour:D1}"+ Text.TranslateText(" hours") + $"{time.min:D2}"+ 
-            Text.TranslateText(" minutes") + $"{time.sec:D2}"+ Text.TranslateText(" seconds");
+            {
+                str_res = $"{time.hour:D1}" + Text.TranslateText(" hours") + " " + $"{time.min:D2}" +
+                Text.TranslateText(" minutes") + " " + $"{time.sec:D2}" + Text.TranslateText(" seconds");
+            }
         }
         static void Lessons_count(
         out int count,
@@ -195,6 +195,9 @@ namespace Laba4
                     continue;
 
                 parts = line.Split('|');
+                if (parts.Length < 6 || parts[0].Trim() != today)
+                    continue;
+
                 /* хотя зачем тут Trim я не знаю , но пусть будет , может пригодится в будущем
                 Ну на сдучей если какой-то Власыч-колбасыч придерётся, шо код не оптимальный , 
                 то я ему скажу , что это для того , чтобы не было проблем с пробелами в файле , 
@@ -229,24 +232,47 @@ namespace Laba4
                 Text.P($"{key[i]} - {Text.TranslateText("Lesson")} {i + 1}");
             }
 
-            ConsoleKeyInfo pressed = Console.ReadKey(true);
-            int index = pressed.Key - ConsoleKey.Q;
-            if (index >= 0 && index < count)
-                less = $"{index + 1} lesson";
+            while (string.IsNullOrEmpty(less))
+            {
+                ConsoleKeyInfo pressed = Console.ReadKey(true);
+                int index = Array.IndexOf(key, pressed.Key);
+                if (index >= 0 && index < count)
+                    less = $"{index + 1} lesson";
+                else
+                    Text.P("Invalid choice. Please try again.");
+            }
         }
         static void Need_time(string less, out int time)
         {
             string str_time = "";
             string today = GetToday();
+            int selectedLesson = int.Parse(less.Split(' ')[0]);
+            int currentLesson = 0;
+
             foreach (string line in File.ReadLines(path))
             {
                 parts = line.Split('|');
-                if (parts[0].Trim() == today && parts[2].Trim() == less)
+                if (parts.Length < 6 || parts[0].Trim() != today)
+                    continue;
+
+                string type = parts[3].Trim();
+                if (type != "lecture" && type != "practice" && type != "seminar")
+                    continue;
+
+                currentLesson++;
+                if (currentLesson == selectedLesson)
                 {
                     str_time = parts[4].Trim();
                     break;
                 }
             }
+
+            if (string.IsNullOrWhiteSpace(str_time))
+            {
+                time = 0;
+                return;
+            }
+
             ConvertInSec(default, str_time, out time);
         }
          //Ця функція для того , щоб можно було зрозоміти в який час відбуватеся подія, точніш в який пробіжутку дня...
