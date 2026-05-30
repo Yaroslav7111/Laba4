@@ -6,16 +6,13 @@ namespace Laba4
 {
     class Student
     {
-        // =========================
-        // DATA
-        // =========================
-
+        /*Свойства в C# — это члены класса, которые выглядят как поля, но на деле работают как методы (аксессоры).*/
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Gender { get; set; }
 
         public int Age { get; set; }
-        public int Course { get; set; }
+        public string Course { get; set; }
         public string Group { get; set; }
 
         public Dictionary<string, int> Grades { get; set; }
@@ -26,70 +23,21 @@ namespace Laba4
 
         public bool CanEdit { get; set; }
         public string Password { get; set; }
-
+        // Конструктор по умолчанию, который инициализирует словарь оценок
+        // Это нужно для того, чтобы при создании нового студента у него уже был готов словарь для хранения оценок по предметам, 
+        // и не нужно было бы его создавать вручную каждый раз
+        //веном 
         public Student()
         {
             Grades = new Dictionary<string, int>();
         }
 
-        // =========================
-        // TEMPLATE (UI)
-        // =========================
-
-        public static void DrawTemplate()
-        {
-            Console.Clear();
-
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║         STUDENT INFORMATION          ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
-
-            Console.SetCursorPosition(2, 2);
-            Console.Write("Name:");
-
-            Console.SetCursorPosition(2, 4);
-            Console.Write("Surname:");
-
-            Console.SetCursorPosition(2, 6);
-            Console.Write("Gender:");
-
-            Console.SetCursorPosition(2, 8);
-            Console.Write("Age:");
-
-            Console.SetCursorPosition(2, 10);
-            Console.Write("Course: [1] [2] [3] [4]");
-
-            Console.SetCursorPosition(2, 12);
-            Console.Write("Group: [КС-25] [КН-25] [КМ-24]");
-
-            Console.SetCursorPosition(2, 14);
-            Console.Write("Subjects:");
-
-            Console.SetCursorPosition(2, 22);
-            Console.Write("Average:");
-
-            Console.SetCursorPosition(2, 25);
-            Console.Write("Study: [Budget] [Contract]");
-
-            Console.SetCursorPosition(2, 27);
-            Console.Write("Scholarship: ____ грн.");
-
-            Console.SetCursorPosition(2, 29);
-            Console.Write("Can edit: [Yes] [No]");
-
-            Console.SetCursorPosition(2, 31);
-            Console.Write("Password: [Without] [With]");
-        }
-
-        // =========================
-        // SUBJECTS BY COURSE (6+)
-        // =========================
-
-        public static string[] GetSubjectsByCourse(int course)
+        
+        public static string[] GetSubjectsByCourse(string course)
         {
             switch (course)
             {
-                case 1:
+                case "1":
                     return new string[]
                     {
                         "Math I",
@@ -100,7 +48,7 @@ namespace Laba4
                         "Discrete Math"
                     };
 
-                case 2:
+                case "2":
                     return new string[]
                     {
                         "Math II",
@@ -111,7 +59,7 @@ namespace Laba4
                         "Operating Systems"
                     };
 
-                case 3:
+                case "3":
                     return new string[]
                     {
                         "Advanced C#",
@@ -135,15 +83,10 @@ namespace Laba4
             }
         }
 
-        // =========================
-        // AVERAGE
-        // =========================
 
         public void CalculateAverage()
         {
-            AverageGrade = Grades.Count == 0
-                ? 0
-                : Grades.Values.Average();
+            AverageGrade = Grades.Count == 0 ? 0 : Grades.Values.Average();
         }
     }
 }

@@ -111,10 +111,76 @@ namespace Laba4
 
         }
     
-        public static void CreateNewFile()
+    public static void CreateNewFile()
+    {
+        Student student = new Student
         {
-            // Здесь будет код для создания нового файла с данными студента
+            Name = Student.Name,
+            Surname = Student.Surname,
+            Age = Student.Age,
+            Gender = Student.Gender,
+            Course = Student.Course,
+            Group = Student.Group,
+            AverageGrade = Student.AverageGrade,
+            StudyType = Student.StudyType,
+            Scholarship = Student.Scholarship,
+            CanEdit = Student.CanEdit,
+            Password = Student.Password
+        };
+
+        string json = JsonSerializer.Serialize(student, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        });
+
+        // Папка для хранения
+        string folderPath ;
+        if (student.Group == "KC-25")
+        {
+            if (student.StudyType == "Budget")
+            {
+                folderPath = @"/home/yarolav/CSharpProjects/Laba4/Laba4/Students/KC-25/Budget_Students";
+            }
+            else
+            {
+                folderPath = @"/home/yarolav/CSharpProjects/Laba4/Laba4/Students/KC-25/Contract_Students";
+            }
         }
+        else if (student.Group == "KN-25")
+        {
+            if (student.StudyType == "Budget")
+            {
+                folderPath = @"/home/yarolav/CSharpProjects/Laba4/Laba4/Students/KN-25/Budget_Students";
+            }
+            else
+            {
+                folderPath = @"/home/yarolav/CSharpProjects/Laba4/Laba4/Students/KN-25/Contract_Students";
+            }
+        }
+        else if (student.Group == "KM-24")
+        {
+            if (student.StudyType == "Budget")
+            {
+            folderPath = @"/home/yarolav/CSharpProjects/Laba4/Laba4/Students/KM-24/Budget_Students";
+            }
+            else
+            {
+                folderPath = @"/home/yarolav/CSharpProjects/Laba4/Laba4/Students/KM-24/Contract_Students";
+            }
+        }
+        else
+        {
+            folderPath = @"/home/yarolav/CSharpProjects/Laba4/Laba4/Students/Other_Students";
+        }
+
+        // Полный путь к файлу
+        string filePath = Path.Combine(
+            folderPath,
+            $"{student.Name}_{student.Surname}_{student.Group}.json"
+        );
+
+        File.WriteAllText(filePath, json);
+    }
 
 }
 } 
