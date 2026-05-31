@@ -1,3 +1,4 @@
+using System.Text.Json;
 namespace Laba4
 {
     class Add_new_file
@@ -62,7 +63,7 @@ namespace Laba4
             Text.P("Subjects:");
             // Здесь мы просто отображаем предметы в зависимости от курса студента ,
             // и пофакту это просто вызов метода который возвращает массив с предметами
-            string[] subjects = student.GetSubjectsByCourse(student.Course);
+            string[] subjects = Student.GetSubjectsByCourse(student.Course);
             for (int i = 0; i < subjects.Length; i++)
             {
                 Console.SetCursorPosition(4, 16 + i);
@@ -82,7 +83,7 @@ namespace Laba4
                 Text.P("Scholarship: " + student.Scholarship + " грн.");
                 Console.SetCursorPosition(2, 28);
                 Text.P("Can edit: [Yes] [No]");
-                student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes ", "No" }, 16, 29);
+                student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes ", "No" }, 16, 29).Trim() == "Yes";
                 if (student.CanEdit)
                 {
                     Console.SetCursorPosition(2, 30);
@@ -101,7 +102,7 @@ namespace Laba4
                 student.Scholarship = 0;
                 Console.SetCursorPosition(2, 26);
                 Text.P("Can edit: [Yes] [No]");
-                student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes ", "No" }, 16, 27) ;
+                student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes ", "No" }, 16, 27).Trim() == "Yes";
                  if (student.CanEdit)
                 {
                     Console.SetCursorPosition(2, 28);

@@ -2,7 +2,7 @@ namespace Laba4
 {
     class Program
     {
-        static void Main()
+        public static void Main()
         {
             Text.CurrentLang = "en";
 
