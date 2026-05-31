@@ -23,11 +23,11 @@ namespace Laba4
             Console.SetCursorPosition(2, 2);
             Text.P("Name:");
             Console.SetCursorPosition(8, 2);
-            student.Name = Console.ReadLine();
+            student.Name = Console.ReadLine() ?? string.Empty;
             Console.SetCursorPosition(2, 4);
             Text.P("Surname:");
             Console.SetCursorPosition(11, 4);
-            student.Surname = Console.ReadLine();
+            student.Surname = Console.ReadLine() ?? string.Empty;
             Console.SetCursorPosition(2, 6);
             Text.P("Gender:");
             Console.SetCursorPosition(10, 6);
@@ -38,93 +38,106 @@ namespace Laba4
             //  а дальше уже массив с пунктами и координаты для отображения меню
             student.Gender = MenuSelect.ShowHorizontal("", new string[] { "Male ", "Female" }, 10, 6);
             Console.SetCursorPosition(2, 8);
-            Text.P("Age:");
-            Console.SetCursorPosition(7, 8);
-            int age = int.Parse(Console.ReadLine());
-
-            if (age > 0)
-            {
-                student.Age = age;
-            }
-            else
-            {
-                Console.SetCursorPosition(2, 8);
-                Text.P("You entered not correct age, please try again: ");
-                student.Age = int.Parse(Console.ReadLine());
-            }
+            Text.P("Birth date (yyyy-mm-dd):");
+            Console.SetCursorPosition(28, 8);
+            student.BirthDate = ReadBirthDate();
             Console.SetCursorPosition(2, 10);
-            Text.P("Course: ");
-            Console.SetCursorPosition(10, 10);
-            student.Course = MenuSelect.ShowHorizontal("", new string[] { "1", "2", "3", "4" }, 10, 10);
+            Text.P($"Age: {student.Age}");
             Console.SetCursorPosition(2, 12);
-            Text.P("Group: ");
-            student.Group = MenuSelect.ShowHorizontal("", new string[] { "КС-25", "КН-25", "КМ-24" }, 10, 12);
+            Text.P("Course: ");
+            Console.SetCursorPosition(10, 12);
+            student.Course = MenuSelect.ShowHorizontal("", new string[] { "1", "2", "3", "4" }, 10, 12);
             Console.SetCursorPosition(2, 14);
+            Text.P("Group: ");
+            student.Group = MenuSelect.ShowHorizontal("", new string[] { "КС-25", "КН-25", "КМ-24" }, 10, 14);
+            Console.SetCursorPosition(2, 16);
             Text.P("Subjects:");
             // Здесь мы просто отображаем предметы в зависимости от курса студента ,
             // и пофакту это просто вызов метода который возвращает массив с предметами
             string[] subjects = Student.GetSubjectsByCourse(student.Course);
             for (int i = 0; i < subjects.Length; i++)
             {
-                Console.SetCursorPosition(4, 16 + i);
+                Console.SetCursorPosition(4, 18 + i);
                 Text.P(subjects[i]);
             }
-            Console.SetCursorPosition(2, 22);
+            Console.SetCursorPosition(2, 24);
             Text.P("Average:");
-            Console.SetCursorPosition(11, 22);
+            Console.SetCursorPosition(11, 24);
             student.AverageGrade = M_op.CalculateAverageGrade(student.Grades);
-            Console.SetCursorPosition(2, 25);
+            Console.SetCursorPosition(2, 27);
             Text.P("Study:");
-            student.StudyType = MenuSelect.ShowHorizontal("", new string[] { "Budget", "Contract" }, 10, 25);
+            student.StudyType = MenuSelect.ShowHorizontal("", new string[] { "Budget", "Contract" }, 10, 27);
             if (student.StudyType == "Budget")
             {
                 student.Scholarship = M_op.CalculateScholarship(student.AverageGrade, student.StudyType);
-                Console.SetCursorPosition(2, 26);
-                Text.P("Scholarship: " + student.Scholarship + " грн.");
                 Console.SetCursorPosition(2, 28);
+                Text.P("Scholarship: " + student.Scholarship + " грн.");
+                Console.SetCursorPosition(2, 30);
                 Text.P("Can edit: [Yes] [No]");
-                student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes ", "No" }, 16, 29).Trim() == "Yes";
+                student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes ", "No" }, 16, 31).Trim() == "Yes";
                 if (student.CanEdit)
                 {
-                    Console.SetCursorPosition(2, 30);
+                    Console.SetCursorPosition(2, 33);
                     Text.P("Password: [Without] [With]");
-                    student.Password = MenuSelect.ShowHorizontal("", new string[] { "Without ", "With" }, 16, 31);
-                    if (student.Password == "With")
+                    string passwordMode = MenuSelect.ShowHorizontal("", new string[] { "Without ", "With" }, 16, 34).Trim();
+                    student.Password = string.Empty;
+                    if (passwordMode == "With")
                     {
-                        Console.SetCursorPosition(2, 32);
+                        Console.SetCursorPosition(2, 36);
                         Text.P("Enter password:");
-                        student.Password = Console.ReadLine();
+                        student.Password = Console.ReadLine() ?? string.Empty;
                     }
                 }
             } 
             else if (student.StudyType == "Contract")
             {
                 student.Scholarship = 0;
-                Console.SetCursorPosition(2, 26);
+                Console.SetCursorPosition(2, 28);
                 Text.P("Can edit: [Yes] [No]");
-                student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes ", "No" }, 16, 27).Trim() == "Yes";
+                student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes ", "No" }, 16, 29).Trim() == "Yes";
                  if (student.CanEdit)
                 {
-                    Console.SetCursorPosition(2, 28);
+                    Console.SetCursorPosition(2, 31);
                     Text.P("Password: [Without] [With]");
-                    student.Password = MenuSelect.ShowHorizontal("", new string[] { "Without ", "With" }, 16, 29);
-                    if (student.Password == "With")
+                    string passwordMode = MenuSelect.ShowHorizontal("", new string[] { "Without ", "With" }, 16, 32).Trim();
+                    student.Password = string.Empty;
+                    if (passwordMode == "With")
                     {
-                        Console.SetCursorPosition(2, 30);
+                        Console.SetCursorPosition(2, 34);
                         Text.P("Enter password:");
-                        student .Password = Console.ReadLine();
+                        student.Password = Console.ReadLine() ?? string.Empty;
                     }
                 }
             }
+            Console.SetCursorPosition(2, 38);
             Text.PLine("You wonna save this student?");
-            student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes", "No" }, 16, 29) == "Yes";
-            if (student.CanEdit)
+            bool shouldSave = MenuSelect.ShowHorizontal("", new string[] { "Yes", "No" }, 16, 39).Trim() == "Yes";
+            if (shouldSave)
             {                
                 CreateNewFile(student);
             }
 
         }
     
+
+        private static DateTime ReadBirthDate()
+        {
+            while (true)
+            {
+                string input = Console.ReadLine() ?? string.Empty;
+
+                if (DateTime.TryParse(input, out DateTime birthDate) &&
+                    birthDate.Date <= DateTime.Today)
+                {
+                    return birthDate.Date;
+                }
+
+                Console.SetCursorPosition(2, 8);
+                Text.P("Wrong birth date, use yyyy-mm-dd: ");
+                Console.SetCursorPosition(37, 8);
+            }
+        }
+
     public static void CreateNewFile(Student student)
     {
        
@@ -134,6 +147,7 @@ namespace Laba4
             WriteIndented = true
         });
 
+        string studentsRootPath = Path.Combine(AppContext.BaseDirectory, "Students");
         // Папка для хранения
         string folderPath ;
         // Выбираем папку в зависимости от типа обучения студента
@@ -141,7 +155,7 @@ namespace Laba4
             student.StudyType == "Budget" ? "Budget_Students" : "Contract_Students";
         // Полный путь к папке для хранения файла
         folderPath = Path.Combine(
-            "/home/yaroslav/CSharpProjects/Laba4/Laba4/Students",
+            studentsRootPath,
             student.Group,
             typeFolder
         );
@@ -150,6 +164,14 @@ namespace Laba4
             folderPath,
             $"{student.Name}_{student.Surname}_{student.Group}.json"
         );
+
+        if (!StudentGroupControl.CanAddStudent(studentsRootPath, student.Group, filePath))
+        {
+            Text.P(StudentGroupControl.BuildLimitMessage(student.Group));
+            Console.ReadKey(true);
+            return;
+        }
+
         Directory.CreateDirectory(folderPath);
 
         File.WriteAllText(filePath, json);

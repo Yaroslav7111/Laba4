@@ -7,7 +7,7 @@ namespace Laba4
     public static class Text
     {
         
-        public static string CurrentLang ; 
+        public static string CurrentLang = "en";
 
       // Этот метод принимает строку, переводит ее на текущий язык и выводит на экран.
         public static void P(string text)

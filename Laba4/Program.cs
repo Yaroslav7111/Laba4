@@ -9,7 +9,7 @@ namespace Laba4
             Text.P("Choose language: en - English, ru - Russian, ua - Ukrainian.");
             Console.Write("Choose: ");
 
-            string lang = Console.ReadLine();
+            string lang = Console.ReadLine() ?? "en";
 
             if (lang != "en" && lang != "ru" && lang != "ua")
             {
@@ -26,7 +26,7 @@ namespace Laba4
             }
         }
 
-        static void ShowMenu()
+        public static void ShowMenu()
         {
             Text.P(
                 "Choose what you want:\n" +

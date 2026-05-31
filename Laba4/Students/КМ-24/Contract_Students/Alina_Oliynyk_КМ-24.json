@@ -1,0 +1,22 @@
+{
+  "Name": "Alina",
+  "Surname": "Oliynyk",
+  "Gender": "Female",
+  "BirthDate": "2007-12-27",
+  "Age": 18,
+  "Course": "2",
+  "Group": "КМ-24",
+  "Grades": {
+    "Math II": 97,
+    "OOP": 73,
+    "Algorithms": 78,
+    "Database": 83,
+    "Web Dev": 88,
+    "Operating Systems": 93
+  },
+  "AverageGrade": 85.33,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": false,
+  "Password": ""
+}
