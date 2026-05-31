@@ -53,19 +53,16 @@ offsetSeconds так и будет 0 , ну і зрозуміло якощо ю�
 */
 public static int offsetSeconds = 0;
 static int clockX = 0;
-static int clockY = 7;
-static int menuY = 8;
+static int clockY = 1;
+static int menuY = 2;
 
 
 public static void Run_one()
 {
     running = true;
-    clockY = 7;
-    menuY = 8;
     Text.P("Hello! This program will help you to know your schedule and the current time.");
     secondMain();
 }
-
 public static void secondMain()
     {
         Console.SetCursorPosition(0, menuY);
@@ -99,33 +96,40 @@ public static void secondMain()
     Console.Write(new string(' ', Console.WindowWidth));
     Console.SetCursorPosition(0, menuY+1);
 
-    if (key.Key == ConsoleKey.Q)
-    {
-        //веном 
-      ChangeTimeMenu();
-      running = false;
-    }
-    else if (key.Key == ConsoleKey.W)
-    {
-        Console.Clear();
-        runningClock = false;
+   switch (key.Key)
+{
+    case ConsoleKey.Q:
+        // веном
+        ChangeTimeMenu();
         running = false;
-        WhatLesson(now);
-    }
-    else if (key.Key == ConsoleKey.E)
-    {
+        break;
+
+    case ConsoleKey.W:
+            Console.Clear();
+        runningClock = false;
+
+        DateTime real = DateTime.Now.AddSeconds(offsetSeconds);
+        MyTime current = (real.Hour, real.Minute, real.Second);
+
+        WhatLesson(current);
+
+        secondMain(); 
+        break;
+
+    case ConsoleKey.E:
         Console.Clear();
         runningClock = false;
         running = false;
         Difference_main();
-    }
-    else if (key.Key == ConsoleKey.R)
-    {
+        break;
+
+    case ConsoleKey.R:
         runningClock = false;
         running = false;
         Console.Clear();
         Program.ShowMenu();
-    }
+        break;
+}
 }
     }
 public static void Clock()
@@ -394,40 +398,34 @@ public static void WhatLesson(MyTime t)
 
     string today = DateTime.Now.AddSeconds(offsetSeconds).DayOfWeek.ToString();
 
-    if (!File.Exists(Dop_Time.path))
-    {
-        Text.P("Schedule file was not found.");
-        Marmishka();
-        return;
-    }
 
     foreach (string line in File.ReadLines(Dop_Time.path))
+{
+    if (string.IsNullOrWhiteSpace(line))
+        continue;
+
+    string[] parts = line.Split('|');
+
+    if (parts.Length < 6)
+        continue;
+
+    string type = parts[3].Trim();
+
+    if (type != "lecture" && type != "practice" && type != "seminar")
+        continue;
+
+    hasLessonsToday = true;
+
+    MyTime start = ParseTime(parts[4].Trim());
+    MyTime end = ParseTime(parts[5].Trim());
+
+    if (IsTimeInRange(t, start, end))
     {
-        if (string.IsNullOrWhiteSpace(line))
-            continue;
-
-        string[] parts = line.Split('|');
-         // Якщо день у рядку не відповідає поточному дню, пропускаємо цей рядок і переходимо до наступного
-        if (parts.Length < 6 || parts[0].Trim() != today)
-            continue;
-
-
-        string type = parts[3].Trim();
-        if (type != "lecture" && type != "practice" && type != "seminar")
-            continue;
-
-        hasLessonsToday = true;
-
-        MyTime start = ParseTime(parts[4].Trim());
-        MyTime end = ParseTime(parts[5].Trim());
-
-        if (IsTimeInRange(t, start, end))
-        {
-            Text.P($"Now is lesson: {type}, {parts[1].Trim()}");
-            isNowLesson = true;
-            break;
-        }
+        Text.P($"Now is lesson: {type}, {parts[1].Trim()}");
+        isNowLesson = true;
+        break;
     }
+}
 
     if (!hasLessonsToday)
     {
@@ -437,7 +435,10 @@ public static void WhatLesson(MyTime t)
     {
         Text.P("Now there are no lessons");
     }
-    Marmishka();
+    Text.P("\nPress any key to return...");
+    Console.ReadKey(true);
+
+    Console.Clear();
 
 }
 static void Marmishka()

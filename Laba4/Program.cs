@@ -28,6 +28,7 @@ namespace Laba4
 
         public static void ShowMenu()
         {
+            Console.Clear();
             Text.P(
                 "Choose what you want:\n" +
                 "1 - Task 1\n" +

@@ -39,7 +39,7 @@ namespace Laba4
             else if (key.Key == ConsoleKey.R)
             {
                 Console.Clear();
-                TimeProgram.Difference_main();
+                TimeProgram.Run_one();
             }
         }
         static void Calcu_bet_less()
@@ -101,7 +101,10 @@ namespace Laba4
                     Text.P(Text.TranslateText("You have chosen the same lesson\n")+
                     Text.TranslateText("Please, choose another lesson")
                     );
+                    Text.P("");
+                    Text.P("First lesson" + ":");
                     Choose_less(out first_less, count);
+                    Text.P("Second lesson" + ":");
                     Choose_less(out second_less, count);
                 }
                 int one_day = 0;
