@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Laba4")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c92e56b3cfd756643c332905fa2c88c8f855a2fc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+edd054887125d298d3045ab45685429dd8eb9d49")]
 [assembly: System.Reflection.AssemblyProductAttribute("Laba4")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Laba4")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
