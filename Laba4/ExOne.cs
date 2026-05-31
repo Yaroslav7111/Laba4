@@ -36,11 +36,13 @@ public static bool running = true;
   */
 public static bool runningClock = true;
 /*
-Ця змінна для зберігання поточного дня тижня, яка буде використовуватися для визначення розкладу занять на основі дня тижня.
+Ця змінна для зберігання поточного дня тижня, яка буде використовуватися для визначення розкладу занять на основі дня тижня.Берется с компа
 */
 public static string currentDay = DateTime.Now.DayOfWeek.ToString();
 /*
-   
+   Тут я поясню на руском , сорі(
+   Если коротко то мы создаём перменую каторая хранит даные  (int hour, int min, int sec)
+   то-есть 
 */
 public static MyTime now;
 // Зміщення часу в секундах від реального часу, яке можна змінювати через меню
@@ -101,11 +103,13 @@ public static void secondMain()
     else if (key.Key == ConsoleKey.W)
     {
         Console.Clear();
-        WhatLesson(now);
         runningClock = false;
+        running = false;
+        WhatLesson(now);
     }
     else if (key.Key == ConsoleKey.E)
     {
+        Console.Clear();
         runningClock = false;
         running = false;
         Difference_main();
@@ -251,6 +255,7 @@ public static void ChangeTimeMenu()
 }
     // Після кожного натискання клавіші оновлюємо рядок часу (offsetSeconds змінюється разом із now)
     Console.SetCursorPosition(0, 10);
+    //Ну єто нужно щоб красіво було !
     Console.Write(new string(' ', Console.WindowWidth));
 }
 
@@ -261,7 +266,7 @@ public static string MyTimeToString(MyTime t)
 
     return $"{t.hour:D1}:{t.min:D2}:{t.sec:D2}";
 }
-
+//Це для того шо час не віходив за межі  
 public static MyTime Normalize(MyTime t)
 {
    if (t.sec >= 60)
