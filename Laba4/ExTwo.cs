@@ -64,7 +64,8 @@ namespace Laba4
                             $"Группа: {student.Group} | " +
                             $"Дата рождения: {student.BirthDate:yyyy-MM-dd} | " +
                             $"Возраст: {student.Age} | " +
-                            $"Физика: {physics}"
+                            $"Физика: {physics} |" + 
+                            $"Степендия: {student.Scholarship} грн."
                         );
                     }
                 }
