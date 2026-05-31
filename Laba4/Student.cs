@@ -11,7 +11,8 @@ namespace Laba4
         public string Surname { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
 
-        public int Age { get; set; }
+        public DateTime BirthDate { get; set; }
+        public int Age => CalculateAge(BirthDate);
         public string Course { get; set; } = string.Empty;
         public string Group { get; set; } = string.Empty;
 
@@ -33,6 +34,20 @@ namespace Laba4
         public Student()
         {
             Grades = new Dictionary<string, int>();
+        }
+
+        public static int CalculateAge(DateTime birthDate)
+        {
+            if (birthDate == default)
+                return 0;
+
+            DateTime today = DateTime.Today;
+            int age = today.Year - birthDate.Year;
+
+            if (birthDate.Date > today.AddYears(-age))
+                age--;
+
+            return age;
         }
 
         

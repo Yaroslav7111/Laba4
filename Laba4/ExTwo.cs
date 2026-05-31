@@ -61,6 +61,8 @@ namespace Laba4
                         Text.P(
                             $"{student.Name} {student.Surname} | " +
                             $"Группа: {student.Group} | " +
+                            $"Дата рождения: {student.BirthDate:yyyy-MM-dd} | " +
+                            $"Возраст: {student.Age} | " +
                             $"Физика: {physics}"
                         );
                     }

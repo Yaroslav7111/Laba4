@@ -1,0 +1,22 @@
+{
+  "Name": "Nikita",
+  "Surname": "Hrytsenko",
+  "Gender": "Male",
+  "BirthDate": "2005-01-06",
+  "Age": 21,
+  "Course": "1",
+  "Group": "КС-25",
+  "Grades": {
+    "Math I": 97,
+    "Physics I": 73,
+    "Programming Basics": 78,
+    "English": 83,
+    "History": 88,
+    "Discrete Math": 93
+  },
+  "AverageGrade": 85.33,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": true,
+  "Password": "pass09"
+}

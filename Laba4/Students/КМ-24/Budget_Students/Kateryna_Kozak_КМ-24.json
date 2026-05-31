@@ -1,0 +1,22 @@
+{
+  "Name": "Kateryna",
+  "Surname": "Kozak",
+  "Gender": "Female",
+  "BirthDate": "2005-12-22",
+  "Age": 20,
+  "Course": "2",
+  "Group": "КМ-24",
+  "Grades": {
+    "Math II": 72,
+    "OOP": 77,
+    "Algorithms": 82,
+    "Database": 87,
+    "Web Dev": 92,
+    "Operating Systems": 97
+  },
+  "AverageGrade": 84.5,
+  "StudyType": "Budget",
+  "Scholarship": 1500,
+  "CanEdit": false,
+  "Password": ""
+}
