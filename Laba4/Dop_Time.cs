@@ -426,26 +426,10 @@ namespace Laba4
          "Early morning". 
          А кортеж я использовал для того , чтобы было удобно хранить эти промежутки и не создавать кучу переменных...Ауф!
         */
-       static (int start, int end, string name)[] dayParts =
-    {
-        (0, 4, "Midnight"),
-        (4, 6, "Early morning"),
-        (6, 12, "Morning"),
-        (12, 13, "Noon"),
-        (13, 17, "Afternoon"),
-        (17, 21, "Evening"),
-        (21, 24, "Night") 
-    };
     static string GetToday()
     {
         return DateTime.Now.AddSeconds(TimeProgram.offsetSeconds).DayOfWeek.ToString();
     }
 
-    //Жестко ,с характером ,как мужчина,это функция парсирует
-    static int ParseHour(string time)
-    {
-        var parts = time.Split(':');
-        return int.Parse(parts[0]);
-    }
     }
 }

@@ -74,3 +74,4 @@
 /home/yarolav/CSharpProjects/Laba4/Laba4/bin/Debug/net10.0/Students/КС-25/Contract_Students/Vira_Kozak_КС-25.json
 /home/yarolav/CSharpProjects/Laba4/Laba4/bin/Debug/net10.0/Students/КС-25/Contract_Students/Vlad_Tkachenko_КС-25.json
 /home/yarolav/CSharpProjects/Laba4/Laba4/bin/Debug/net10.0/Students/КС-25/Contract_Students/Yulia_Koval_КС-25.json
+/home/yarolav/CSharpProjects/Laba4/Laba4/bin/Debug/net10.0/Students/КМ-24/Contract_Students/Kate_Ananasovna_KM-24.json

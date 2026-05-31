@@ -45,6 +45,7 @@ namespace Laba4
                 Student? student =
                     JsonSerializer.Deserialize<Student>(json);
 
+               
                 if (student == null)
                     continue;
 
