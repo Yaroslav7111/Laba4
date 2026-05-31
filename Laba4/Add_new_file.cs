@@ -147,6 +147,7 @@ namespace Laba4
             WriteIndented = true
         });
 
+        string studentsRootPath = Path.Combine(AppContext.BaseDirectory, "Students");
         // Папка для хранения
         string folderPath ;
         // Выбираем папку в зависимости от типа обучения студента
@@ -154,8 +155,7 @@ namespace Laba4
             student.StudyType == "Budget" ? "Budget_Students" : "Contract_Students";
         // Полный путь к папке для хранения файла
         folderPath = Path.Combine(
-            AppContext.BaseDirectory,
-            "Students",
+            studentsRootPath,
             student.Group,
             typeFolder
         );
@@ -164,6 +164,14 @@ namespace Laba4
             folderPath,
             $"{student.Name}_{student.Surname}_{student.Group}.json"
         );
+
+        if (!StudentGroupControl.CanAddStudent(studentsRootPath, student.Group, filePath))
+        {
+            Text.P(StudentGroupControl.BuildLimitMessage(student.Group));
+            Console.ReadKey(true);
+            return;
+        }
+
         Directory.CreateDirectory(folderPath);
 
         File.WriteAllText(filePath, json);
