@@ -3,7 +3,7 @@ namespace Laba4
 {
     public static class Dop_Time
     {
-        static string[] parts ;
+        static string[] parts = Array.Empty<string>();
         public static string path = Path.Combine(AppContext.BaseDirectory, "plan.txt");
         static ConsoleKey [] key = new ConsoleKey[] 
         { ConsoleKey.Q, 
@@ -125,7 +125,7 @@ namespace Laba4
            Console.Clear();
            Text.P(Text.TranslateText("Choose the event"));
            string today = GetToday();
-           Big_Boss(today, out List<string> events, out List<string> time_events);
+           Big_Boss(today, out List<string> events, out List<string> time_events, out _);
            for (int i = 0; i < events.Count; i++)
            {
                Text.P($"{i + 1}. {Text.TranslateText(events[i])} ({time_events[i]})");

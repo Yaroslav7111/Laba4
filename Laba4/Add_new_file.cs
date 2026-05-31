@@ -23,11 +23,11 @@ namespace Laba4
             Console.SetCursorPosition(2, 2);
             Text.P("Name:");
             Console.SetCursorPosition(8, 2);
-            student.Name = Console.ReadLine();
+            student.Name = Console.ReadLine() ?? string.Empty;
             Console.SetCursorPosition(2, 4);
             Text.P("Surname:");
             Console.SetCursorPosition(11, 4);
-            student.Surname = Console.ReadLine();
+            student.Surname = Console.ReadLine() ?? string.Empty;
             Console.SetCursorPosition(2, 6);
             Text.P("Gender:");
             Console.SetCursorPosition(10, 6);
@@ -40,18 +40,15 @@ namespace Laba4
             Console.SetCursorPosition(2, 8);
             Text.P("Age:");
             Console.SetCursorPosition(7, 8);
-            int age = int.Parse(Console.ReadLine());
-
-            if (age > 0)
-            {
-                student.Age = age;
-            }
-            else
+            int age;
+            while (!int.TryParse(Console.ReadLine(), out age) || age <= 0)
             {
                 Console.SetCursorPosition(2, 8);
                 Text.P("You entered not correct age, please try again: ");
-                student.Age = int.Parse(Console.ReadLine());
+                Console.SetCursorPosition(47, 8);
             }
+
+            student.Age = age;
             Console.SetCursorPosition(2, 10);
             Text.P("Course: ");
             Console.SetCursorPosition(10, 10);
@@ -88,12 +85,13 @@ namespace Laba4
                 {
                     Console.SetCursorPosition(2, 30);
                     Text.P("Password: [Without] [With]");
-                    student.Password = MenuSelect.ShowHorizontal("", new string[] { "Without ", "With" }, 16, 31);
-                    if (student.Password == "With")
+                    string passwordMode = MenuSelect.ShowHorizontal("", new string[] { "Without ", "With" }, 16, 31).Trim();
+                    student.Password = string.Empty;
+                    if (passwordMode == "With")
                     {
                         Console.SetCursorPosition(2, 32);
                         Text.P("Enter password:");
-                        student.Password = Console.ReadLine();
+                        student.Password = Console.ReadLine() ?? string.Empty;
                     }
                 }
             } 
@@ -107,18 +105,19 @@ namespace Laba4
                 {
                     Console.SetCursorPosition(2, 28);
                     Text.P("Password: [Without] [With]");
-                    student.Password = MenuSelect.ShowHorizontal("", new string[] { "Without ", "With" }, 16, 29);
-                    if (student.Password == "With")
+                    string passwordMode = MenuSelect.ShowHorizontal("", new string[] { "Without ", "With" }, 16, 29).Trim();
+                    student.Password = string.Empty;
+                    if (passwordMode == "With")
                     {
                         Console.SetCursorPosition(2, 30);
                         Text.P("Enter password:");
-                        student .Password = Console.ReadLine();
+                        student.Password = Console.ReadLine() ?? string.Empty;
                     }
                 }
             }
             Text.PLine("You wonna save this student?");
-            student.CanEdit = MenuSelect.ShowHorizontal("", new string[] { "Yes", "No" }, 16, 29) == "Yes";
-            if (student.CanEdit)
+            bool shouldSave = MenuSelect.ShowHorizontal("", new string[] { "Yes", "No" }, 16, 29).Trim() == "Yes";
+            if (shouldSave)
             {                
                 CreateNewFile(student);
             }
@@ -141,7 +140,8 @@ namespace Laba4
             student.StudyType == "Budget" ? "Budget_Students" : "Contract_Students";
         // Полный путь к папке для хранения файла
         folderPath = Path.Combine(
-            "/home/yaroslav/CSharpProjects/Laba4/Laba4/Students",
+            AppContext.BaseDirectory,
+            "Students",
             student.Group,
             typeFolder
         );

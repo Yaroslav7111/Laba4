@@ -7,22 +7,22 @@ namespace Laba4
     class Student
     {
         /*Свойства в C# — это члены класса, которые выглядят как поля, но на деле работают как методы (аксессоры).*/
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Gender { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Surname { get; set; } = string.Empty;
+        public string Gender { get; set; } = string.Empty;
 
         public int Age { get; set; }
-        public string Course { get; set; }
-        public string Group { get; set; }
+        public string Course { get; set; } = string.Empty;
+        public string Group { get; set; } = string.Empty;
 
         public Dictionary<string, int> Grades { get; set; }
         public double AverageGrade { get; set; }
 
-        public string StudyType { get; set; }
+        public string StudyType { get; set; } = string.Empty;
         public double Scholarship { get; set; }
 
         public bool CanEdit { get; set; }
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
 
             /*
          _   

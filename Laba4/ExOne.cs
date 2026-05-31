@@ -394,6 +394,13 @@ public static void WhatLesson(MyTime t)
 
     string today = DateTime.Now.AddSeconds(offsetSeconds).DayOfWeek.ToString();
 
+    if (!File.Exists(Dop_Time.path))
+    {
+        Text.P("Schedule file was not found.");
+        Marmishka();
+        return;
+    }
+
     foreach (string line in File.ReadLines(Dop_Time.path))
     {
         if (string.IsNullOrWhiteSpace(line))
@@ -401,7 +408,7 @@ public static void WhatLesson(MyTime t)
 
         string[] parts = line.Split('|');
          // Якщо день у рядку не відповідає поточному дню, пропускаємо цей рядок і переходимо до наступного
-        if (parts[0].Trim() != currentDay)
+        if (parts.Length < 6 || parts[0].Trim() != today)
             continue;
 
 

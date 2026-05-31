@@ -31,13 +31,12 @@ namespace Laba4
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
                         Console.Clear();
-                        Program.Main();
                         return;
 
                     default:
                         Console.Clear();
                         Text.P("Invalid choice. Please try again.");
-                        Run_textprocessing(); 
+                        Console.ReadKey(true);
                         break;
                 }
             }

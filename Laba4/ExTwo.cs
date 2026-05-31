@@ -13,6 +13,13 @@ namespace Laba4
 
             Text.P("Студенты первого курса с оценкой 5 по физике:");
 
+            if (!Directory.Exists(studentsPath))
+            {
+                Text.P("Students folder was not found.");
+                Console.ReadKey(true);
+                return;
+            }
+
             foreach (string groupFolder in Directory.GetDirectories(studentsPath))
             {
                 string budgetPath = Path.Combine(groupFolder, "Budget_Students");
