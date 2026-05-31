@@ -4,7 +4,7 @@ namespace Laba4
     {
         public static int[,] Sort_by_edit(int[,] fileDates, string filePath)
         {   
-            fileDates = new int[2, 3];         
+            fileDates = new int[1, 2];         
             string budgetPath = Path.Combine(filePath, "Budget_Students");
             string contractPath = Path.Combine(filePath, "Contract_Students");
             foreach (string file in Directory.GetFiles(budgetPath, "*.json"))

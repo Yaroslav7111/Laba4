@@ -5,23 +5,43 @@ namespace Laba4
 {
 public static class ExOne
 {
+    /*
+    Ем тут такое ,  я в файл Program.cs написав ExOne.Run_one() замість TimeProgram.Run_one()
+     І кампилятор ругается , так что от греха бодльше пусть так будет , і бо щось
+     я написав TimeProgram.Run_one() в Program.cs , а помилка залишилася , пусть так буде 
+     */
+     /*"=>" - це лямда опертатор або оператором go to / "переходить в", пофакту ми передаємо естафету(по умному мне гугл сказав , це називается "делегувати обов'язки") 
+     в нашому випатку обовяски ExOne.Run_one() буде виконувати TimeProgram.Run_one()
+      */
     public static void Run_one() => TimeProgram.Run_one();
 }
 
 class TimeProgram
 {
-    /*це змінна для поточного часу, 
-     яка буде оновлюватися в окремому потоці, 
-     щоб відображати поточний час з урахуванням зміщення, 
-     яке може бути змінено користувачем через меню*/
+   /*
+   Створюемо потік для відображення поточного часу, який буде працювати паралельно з основним потоком програми.
+   Thread? - це nullable тип для потока, який може бути null, если поток не був створен або вже завершився.
+   Це для того щоб можно було більш коректныше обробляти ситуацію, коли потік ще не створен або вже завершився, і уникнути помилок при спробі доступу до нього.
+   І щоб він запускався тільки коли цього захоче юзер (коли він зайде в меню для зміни часу (Перейде до прешого завдання))
+   */
 public static Thread? clockThread;
+/*Це змінна булового значення для того щоб запускать 
+  меню , для того щоб уникнути проблем з другим потоком (потоком для відображення часу), який буде працювати паралельно з основним потоком програми. 
+*/
 public static bool running = true;
+/*
+Це змінна булового значення для того щоб запускать 
+  потік для відображення поточного часу, який буде працювати паралельно з основним потоком програми.
+  І щоб ми могли вмикати і вимикати його в залежності від того, чи хоче юзер бачити поточний час, чи ні 
+  */
 public static bool runningClock = true;
+/*
+Ця змінна для зберігання поточного дня тижня, яка буде використовуватися для визначення розкладу занять на основі дня тижня.
+*/
 public static string currentDay = DateTime.Now.DayOfWeek.ToString();
-// Це змінна для зберігання поточного часу, 
-// яка буде оновлюватися в окремому потоці, 
-// щоб відображати поточний час з урахуванням зміщення, 
-// яке може бути змінено користувачем через меню
+/*
+   
+*/
 public static MyTime now;
 // Зміщення часу в секундах від реального часу, яке можна змінювати через меню
 public static int offsetSeconds = 0;
@@ -33,7 +53,6 @@ static int menuY = 8;
 public static void Run_one()
 {
     running = true;
-    runningClock = true;
     clockY = 7;
     menuY = 8;
     Text.P("Hello! This program will help you to know your schedule and the current time.");
@@ -51,19 +70,24 @@ public static void secondMain()
             "3. " + "Calculate the time remaining until a specific event. " + " Enter E.\n" +
             "4. " + "Exit the program. " + " Enter R."
         );
-
+   /* Коротко екскурс , тут превірка : 
+     - clockThread == null - перевірка , чи создан поток , чи ні , це в основном перевірка на початку запуска кода 
+     - !clockThread.IsAlive - перевірка , жив чи ні поток 
+       вот приклад , якщо runningClock = false; то пофакту поток не працюе (помер) , то ми запускаемо его заново   
+     */ 
     if (clockThread == null || !clockThread.IsAlive)
 {
     runningClock = true;
     clockThread = new Thread(() => Clock());
-    clockThread.IsBackground = true;
     clockThread.Start();
 }
     // Це головна частина програми, яка обробляє введення користувача та виконує відповідні дії
      while (running)
     {
+    //ConsoleKeyInfo - це класс , яки приймає даніе через клаву
+    // а true в  Console.ReadKey(true) для того що в терменале не висвечівалось що ми натиснули 
     ConsoleKeyInfo key = Console.ReadKey(true);
-
+    //Console.SetCursorPosition(x, y);
     Console.SetCursorPosition(0, menuY+1);
     Console.Write(new string(' ', Console.WindowWidth));
     Console.SetCursorPosition(0, menuY+1);
@@ -72,23 +96,26 @@ public static void secondMain()
     {
         //веном 
       ChangeTimeMenu();
+      running = false;
     }
     else if (key.Key == ConsoleKey.W)
     {
+        Console.Clear();
         WhatLesson(now);
+        runningClock = false;
     }
     else if (key.Key == ConsoleKey.E)
     {
         runningClock = false;
+        running = false;
         Difference_main();
-        runningClock = true;
     }
     else if (key.Key == ConsoleKey.R)
     {
         runningClock = false;
         running = false;
         Console.Clear();
-        Text.P("You pressed R");
+        Program.ShowMenu();
     }
 }
     }
@@ -98,6 +125,7 @@ public static void Clock()
     while (runningClock)
     {
         // Получаем реальное время с учетом смещения
+        // Это позволяет отображать текущее время, которое может быть изменено пользователем через меню, а не просто системное время
         DateTime realTime = DateTime.Now.AddSeconds(offsetSeconds);
         //создаем кортеж для хранения текущего времени в формате MyTime (часы, минуты, секунды)
         now = (
@@ -271,7 +299,7 @@ public static MyTime Normalize(MyTime t)
 
     return t;
 }
-
+// Ця функція перетворює час у форматі MyTime (години, хвилини, секунди) у кількість секунд, що минули з півночі
 public static int ToSecSinceMidnight(MyTime t)
 {
     return t.hour * 3600 + t.min * 60 + t.sec;
@@ -365,7 +393,7 @@ public static void Difference_main()
     else if (key.Key == ConsoleKey.R)
     {
     Console.Clear();
-    Text.P("You pressed R");
+    secondMain();
    }
 }
 public static void WhatLesson(MyTime t)
@@ -412,7 +440,13 @@ public static void WhatLesson(MyTime t)
     {
         Text.P("Now there are no lessons");
     }
+    Marmishka();
+
 }
+static void Marmishka()
+    {
+          secondMain();     
+    }
 public static MyTime ParseTime(string timeStr)
 {
     string[] parts = timeStr.Split(':');
