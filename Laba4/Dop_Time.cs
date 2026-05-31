@@ -5,15 +5,17 @@ namespace Laba4
     {
         static string[] parts = Array.Empty<string>();
         public static string path = Path.Combine(AppContext.BaseDirectory, "plan.txt");
-        static ConsoleKey [] key = new ConsoleKey[] 
-        { ConsoleKey.Q, 
-        ConsoleKey.W, 
-        ConsoleKey.E, 
-        ConsoleKey.R, 
-        ConsoleKey.T, 
-        ConsoleKey.Y, 
-        ConsoleKey.U, 
-        ConsoleKey.I };
+        static ConsoleKey[] key =
+        {
+                ConsoleKey.A, ConsoleKey.B, ConsoleKey.C, ConsoleKey.D,
+                ConsoleKey.E, ConsoleKey.F, ConsoleKey.G, ConsoleKey.H,
+                ConsoleKey.I, ConsoleKey.J, ConsoleKey.K, ConsoleKey.L,
+                ConsoleKey.M, ConsoleKey.N, ConsoleKey.O, ConsoleKey.P,
+                ConsoleKey.Q, ConsoleKey.R, ConsoleKey.S, ConsoleKey.T,
+                ConsoleKey.U, ConsoleKey.V, ConsoleKey.W, ConsoleKey.X,
+                ConsoleKey.Y, ConsoleKey.Z,
+
+        };
         // Эту фукцию так назвал 
         // И бо я уже за******ся придумывать названия для функций
         // И переписывать код в 14 РАЗ 
@@ -125,20 +127,64 @@ namespace Laba4
         }
         static void Calcu_bet_events()
         {
-           Console.Clear();
-           Text.P(Text.TranslateText("Choose the event"));
-           string today = GetToday();
-           Big_Boss(today, out List<string> events, out List<string> time_events, out _);
-           for (int i = 0; i < events.Count; i++)
-           {
-               Text.P($"{i + 1}. {Text.TranslateText(events[i])} ({time_events[i]})");
-           }
-           Text.P(Text.TranslateText("Press any key to back"));
-           Console.ReadKey();
-           Console.Clear();
-           Shiza();
+            Console.Clear();
+
+            string today = GetToday();
+
+            Big_Boss(today,
+                out List<string> events,
+                out List<string> startTimes,
+                out List<string> endTimes);
+
+            if (events.Count == 0)
+            {
+                Text.P("No events today");
+                Console.ReadKey();
+                Shiza();
+                return;
+            }
+
+            int max = Math.Min(events.Count, key.Length);
+
+            Text.P("Today events:");
+
+            for (int i = 0; i < max; i++)
+            {
+                Text.P(
+                    $"{i + 1}. {key[i]} - " +
+                    $"{Text.TranslateText(events[i])} " +
+                    $"({startTimes[i]} - {endTimes[i]})"
+                );
+            }
+
+            Text.P("\nChoose FIRST event:");
+            int first = ChooseEventIndex(max);
+
+            Text.P("Choose SECOND event:");
+            int second = ChooseEventIndex(max);
+
+            if (first == second)
+            {
+                Text.P("Same event selected");
+                Console.ReadKey();
+                Shiza();
+                return;
+            }
+
+            ConvertInSec(default, startTimes[first], out int startA);
+            ConvertInSec(default, startTimes[second], out int startB);
+
+            int diff = Math.Abs(startB - startA);
+
+            Time((0,0,0), diff, out string result);
+
+            Text.P($"\nTime between events: {result}");
+
+            Text.P("Press any key to back");
+            Console.ReadKey();
+            Shiza();
         }
-        //Так Кутузов ця функція для щоб знайти дії , які відбувается за день  
+                //Так Кутузов ця функція для щоб знайти дії , які відбувается за день  
             static void Big_Boss(
             string today,
             out List<string> events,
@@ -163,6 +209,32 @@ namespace Laba4
                 startTimes.Add(parts[4].Trim());
                 endTimes.Add(parts[5].Trim());
             }
+        }
+        static int ChooseEventIndex(int count)
+        {
+            int index = -1;
+
+            for (int i = 0; i < count; i++)
+            {
+                Text.P($"{key[i]} - Event {i + 1}");
+            }
+            while (index == -1)
+            {
+                ConsoleKey pressed = Console.ReadKey(true).Key;
+
+                int temp = Array.IndexOf(key, pressed);
+
+                if (temp >= 0 && temp < count)
+                {
+                    index = temp;
+                }
+                else
+                {
+                    Text.P("Invalid choice. Try again.");
+                }
+            }
+
+            return index;
         }
    
         static void Time(Time time, int res, out string str_res)
@@ -346,17 +418,6 @@ namespace Laba4
                 }
             }
             }
-         static Dictionary<ConsoleKey, string> lessons = new Dictionary<ConsoleKey, string >()
-        {
-            { ConsoleKey.Q, "1 lesson" },
-            { ConsoleKey.W, "2 lesson" },
-            { ConsoleKey.E, "3 lesson" },
-            { ConsoleKey.R, "4 lesson" },
-            { ConsoleKey.T, "5 lesson" },
-            { ConsoleKey.Y, "6 lesson" },
-            { ConsoleKey.U, "7 lesson" },
-            { ConsoleKey.I, "8 lesson" }
-        };
         /*Коротко говоря это массив в котором хранятся временные промежутки дня , 
         и используются кортеж начало и конец 
         я это сделал для того если событее происходит в разных промижутках дня , 
