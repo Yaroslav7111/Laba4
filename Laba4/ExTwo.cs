@@ -59,13 +59,13 @@ namespace Laba4
                     // 5 = от 90 до 100 баллов
                     if (physics >= 90 && physics <= 100)
                     {
-                        Text.P(
+                            Text.P(
                             $"{student.Name} {student.Surname} | " +
-                            $"Группа: {student.Group} | " +
-                            $"Дата рождения: {student.BirthDate:yyyy-MM-dd} | " +
-                            $"Возраст: {student.Age} | " +
-                            $"Физика: {physics} |" + 
-                            $"Степендия: {student.Scholarship} грн."
+                            $"Group: {student.Group} | " +
+                            $"Date of birth: {student.BirthDate:yyyy-MM-dd} | " +
+                            $"Age: {student.Age} | " +
+                            $"Physics: {physics} | " +
+                            $"Scholarship: {student.Scholarship} UAH."
                         );
                     }
                 }
