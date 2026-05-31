@@ -136,50 +136,89 @@ namespace Laba4
            Shiza();
         }
         //Так Кутузов ця функція для щоб знайти дії , які відбувается за день  
-        static void Big_Boss(string today, out List<string> events, out List<string> time_events)
-            {
-                events = new List<string>();
-                time_events = new List<string>();
-
-                foreach (string line in File.ReadLines(path))
-                {
-                    // Пропускаем пустые строки 
-                    //Да , я пишу коментари для того чтобы МНЕ В БУДУШЕМ БФЛО ПОНЯТНО 
-                    if (string.IsNullOrWhiteSpace(line))
-                        continue;
-                    //Split - этот метод разделяет строку на части, 
-                    // используя указанный разделитель (в данном случае '|') и возвращает массив строк.
-                    parts = line.Split('|');
-                    if (parts.Length < 6 || parts[0].Trim() != today)
-                        continue;
-                    //Trim - этот метод удаляет все начальные и конечные пробелы из строки... веном  
-                    events.Add(parts[1].Trim());
-
-                    string startTime = parts[4].Trim();
-                    string endTime = parts[5].Trim();
-
-                    time_events.Add($"{startTime} - {endTime}");
-                }
-            }
-        // Эта функция для того , чтобы перевести время в секундах в нормальный формат ,
-        // И вывести его в виде строки , например 1 час 20 минут 30 секунд
-        static void Time(Time time, int res, out string str_res)
+            static void Big_Boss(
+            string today,
+            out List<string> events,
+            out List<string> startTimes,
+            out List<string> endTimes)
         {
-            time.hour = res / 3600;
-            res %= 3600;
-            time.min = res / 60;
-            time.sec = res % 60;
-           //  ( -_-)       
-            if (time.hour == 0)
+            events = new List<string>();
+            startTimes = new List<string>();
+            endTimes = new List<string>();
+
+            foreach (string line in File.ReadLines(path))
             {
-                str_res = $"{time.min:D1}" + Text.TranslateText(" minutes") + " " + $"{time.sec:D2}" + Text.TranslateText(" seconds");
-            }
-            else
-            {
-                str_res = $"{time.hour:D1}" + Text.TranslateText(" hours") + " " + $"{time.min:D2}" +
-                Text.TranslateText(" minutes") + " " + $"{time.sec:D2}" + Text.TranslateText(" seconds");
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                parts = line.Split('|');
+
+                if (parts.Length < 6 || parts[0].Trim() != today)
+                    continue;
+
+                events.Add(parts[1].Trim());
+                startTimes.Add(parts[4].Trim());
+                endTimes.Add(parts[5].Trim());
             }
         }
+   
+        static void Time(Time time, int res, out string str_res)
+            {
+                time.hour = res / 3600;
+                res %= 3600;
+
+                time.min = res / 60;
+                time.sec = res % 60;
+
+                if (time.hour > 0 &&
+                    time.min == 0 &&
+                    time.sec == 0)
+                {
+                    str_res =
+                        $"{time.hour} " +
+                        Text.TranslateText("hours");
+                }
+                else if (time.hour == 0 &&
+                        time.min > 0)
+                {
+                    str_res =
+                        $"{time.min} " +
+                        Text.TranslateText("minutes");
+
+                    if (time.sec > 0)
+                    {
+                        str_res +=
+                            $" {time.sec} " +
+                            Text.TranslateText("seconds");
+                    }
+                }
+                else if (time.hour > 0)
+                {
+                    str_res =
+                        $"{time.hour} " +
+                        Text.TranslateText("hours");
+
+                    if (time.min > 0)
+                    {
+                        str_res +=
+                            $" {time.min} " +
+                            Text.TranslateText("minutes");
+                    }
+
+                    if (time.sec > 0)
+                    {
+                        str_res +=
+                            $" {time.sec} " +
+                            Text.TranslateText("seconds");
+                    }
+                }
+                else
+                {
+                    str_res =
+                        $"{time.sec} " +
+                        Text.TranslateText("seconds");
+                }
+            }
         static void Lessons_count(
         out int count,
         out List<string> lesson, 
@@ -279,34 +318,31 @@ namespace Laba4
          //Наприклад , якщо подія відбувається в 5 годин ранку , то це буде "Early morning" , якщо в 14 годин , то це буде "Afternoon" і так далі
          //хз для чого це я пішу , але мені здається це буде цікаво і корисно для когось , хто буде читати цей код
          // Слава Імператору  
-       static string GetDayPart(int hour)
-        {
-            foreach (var part in dayParts)
+        static void ChooseEvent(out int index, int count)
             {
-                // обычный диапазон
-                /*
-                Если час больше или равен началу и меньше конца, то это текущая часть дня
-                Например, если час 10, то он больше или равен 6 (начало утра) и меньше 12 (конец утра), значит это утро
-                 А кто-то шарит за Вархамер 40к ? 
-                 Не так и думал (- - )
-                */
-                if (part.start < part.end)
-                {
-                    if (hour >= part.start && hour < part.end)
-                        return Text.TranslateText(part.name);
-                }
-                // через полночь
-                else
-                {
-                    // Если час больше или равен началу и меньше конца, то это текущая часть дня
-                    // Например, если час 23, то он больше или равен 21 (начало ночи) и меньше 24 (конец ночи), значит это ночь
-                    if (hour >= part.start || hour < part.end)
-                        return Text.TranslateText(part.name);
-                }
+            index = -1;
+
+            for (int i = 0; i < count && i < key.Length; i++)
+            {
+                Text.P($"{key[i]} - Event {i + 1}");
             }
 
-            return "Unknown";
-        }
+            while (index == -1)
+            {
+                ConsoleKeyInfo pressed = Console.ReadKey(true);
+
+                int temp = Array.IndexOf(key, pressed.Key);
+
+                if (temp >= 0 && temp < count)
+                {
+                    index = temp;
+                }
+                else
+                {
+                    Text.P("Invalid choice.");
+                }
+            }
+            }
          static Dictionary<ConsoleKey, string> lessons = new Dictionary<ConsoleKey, string >()
         {
             { ConsoleKey.Q, "1 lesson" },

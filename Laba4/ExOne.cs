@@ -36,7 +36,8 @@ public static bool running = true;
   */
 public static bool runningClock = true;
 /*
-Ця змінна для зберігання поточного дня тижня, яка буде використовуватися для визначення розкладу занять на основі дня тижня.Берется с компа
+Ця змінна для зберігання поточного дня тижня, яка буде використовуватися для визначення розкладу занять на основі дня тижня.
+Берется с компа
 */
 public static string currentDay = DateTime.Now.DayOfWeek.ToString();
 /*
@@ -46,6 +47,10 @@ public static string currentDay = DateTime.Now.DayOfWeek.ToString();
 */
 public static MyTime now;
 // Зміщення часу в секундах від реального часу, яке можна змінювати через меню
+/*
+Це так працюе , якщо  юезр не буде змінювати час то 
+offsetSeconds так и будет 0 , ну і зрозуміло якощо юзер  
+*/
 public static int offsetSeconds = 0;
 static int clockX = 0;
 static int clockY = 7;
@@ -78,11 +83,11 @@ public static void secondMain()
        вот приклад , якщо runningClock = false; то пофакту поток не працюе (помер) , то ми запускаемо его заново   
      */ 
     if (clockThread == null || !clockThread.IsAlive)
-{
+    {
     runningClock = true;
     clockThread = new Thread(() => Clock());
     clockThread.Start();
-}
+    }
     // Це головна частина програми, яка обробляє введення користувача та виконує відповідні дії
      while (running)
     {
@@ -142,7 +147,8 @@ public static void Clock()
             $"{Text.TranslateText("Now is the time:")} {MyTimeToString(now)} | {GetDayOfWeek()}";
 
         Console.SetCursorPosition(clockX, clockY);
-       Console.Write(timeText.PadRight(50));
+        Console.Write(timeText.PadRight(50));
+        //буде обновлюватіся кожну 1 секунду , і буде здаватися, що час іде
         Thread.Sleep(1000);
     }
 }
@@ -309,6 +315,7 @@ public static int ToSecSinceMidnight(MyTime t)
 {
     return t.hour * 3600 + t.min * 60 + t.sec;
 }
+//благодаря фокусам ми шаманім час у секунди 
 public static MyTime FromSecSinceMidnight(int t)
 {
     // Ця функція перетворює кількість секунд, що минули з півночі, назад у формат MyTime (години, хвилини, секунди)
@@ -324,11 +331,12 @@ public static MyTime FromSecSinceMidnight(int t)
 
     return result;
 }
-
+//додавання секунди (ну я думаю це понятно по назвє)
 public static MyTime AddSeconds(MyTime t, int s)
 {
+    //перетворяємо в секунди 
     int totalSeconds = ToSecSinceMidnight(t);
-
+    //додаємо s секунд
     totalSeconds += s;
 
     totalSeconds %= 86400;
@@ -376,30 +384,7 @@ public static int Difference(int sec1 , int sec2 , out int result)
 }
 public static void Difference_main()
     {
-        Console.Clear();
-        Text.P(
-    "Choose what you want:\n" +
-    "1. Calculate difference between two times (Q)\n" +
-    "2. Calculate time until a specific event (W)\n" +
-    "3. Exit to main menu (R)"
-    );
- 
-    ConsoleKeyInfo key = Console.ReadKey(true);
-    if (key.Key == ConsoleKey.Q)
-    {
-     Console.Clear();
-     Dop_Time.Shiza();
-    }
-    else if (key.Key == ConsoleKey.W)
-    {
-     Console.Clear();
-     Text.P("This option is not implemented yet.");
-    }
-    else if (key.Key == ConsoleKey.R)
-    {
-    Console.Clear();
-    secondMain();
-   }
+      Dop_Time.Shiza();
 }
 public static void WhatLesson(MyTime t)
 {
@@ -452,6 +437,7 @@ static void Marmishka()
     {
           secondMain();     
     }
+    // жоско , оп мурск
 public static MyTime ParseTime(string timeStr)
 {
     string[] parts = timeStr.Split(':');
