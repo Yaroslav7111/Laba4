@@ -45,7 +45,7 @@ namespace Laba4
         } 
         static void Born_on_the_same_day()
         {
-            
+            Born_in_same_day.Rush();
         }
     }
 }

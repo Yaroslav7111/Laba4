@@ -11,7 +11,7 @@ namespace Laba4
                 "Students"
             );
 
-            Text.P("Студенты первого курса с оценкой 5 по физике:");
+            Text.P("First-year students with a grade of 5 in physics:");
 
             if (!Directory.Exists(studentsPath))
             {
