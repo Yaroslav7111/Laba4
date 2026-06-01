@@ -38,7 +38,7 @@ namespace Laba4
             Text.P("Birth date (yyyy-mm-dd):");
             Console.SetCursorPosition(28, 8);
 
-            string birthInput = Console.ReadLine() ?? string.Empty;
+            string birthInput = Console.ReadLine();
 
             student.BirthDate =
                 DateTime.TryParse(birthInput, out DateTime bd) && bd.Date <= DateTime.Today
@@ -59,16 +59,15 @@ namespace Laba4
             Text.P("Group:");
             student.Group = MenuSelect.ShowHorizontal("", new string[] { "КС-25", "КН-25", "КМ-24" }, 10, 14);
 
-            // SUBJECTS
             Console.SetCursorPosition(2, 16);
             Text.P("Subjects:");
-
             string[] subjects = Student.GetSubjectsByCourse(student.Course);
 
             for (int i = 0; i < subjects.Length; i++)
             {
-                Console.SetCursorPosition(4, 18 + i);
-                Text.P(subjects[i]);
+                int grade = int.Parse(Console.ReadLine());
+
+                student.Grades[subjects[i]] = grade;
             }
 
             // AVERAGE
@@ -158,6 +157,39 @@ namespace Laba4
                 CreateNewFile(student);
             }
         }
+            private static int ReadGrade(int x, int y)
+        {
+            while (true)
+            {
+                Console.SetCursorPosition(x, y);
+                Text.PLine("Grade:");
+                Console.SetCursorPosition(x + 7, y);
+                Console.Write(new string(' ', 10));
+                Console.SetCursorPosition(x + 7, y);
+
+                string input = Console.ReadLine() ?? string.Empty;
+
+                if (int.TryParse(input, out int grade) && grade >= 0 && grade <= 100)
+                {
+                    ClearGradeError(y);
+                    return grade;
+                }
+
+                Console.SetCursorPosition(2, 25);
+                Console.Write(new string(' ', 80));
+                Console.SetCursorPosition(2, 25);
+                Text.PLine("Invalid grade. Enter 0-100.");
+            }
+        }
+
+        private static void ClearGradeError(int currentY)
+        {
+            Console.SetCursorPosition(2, 25);
+            Console.Write(new string(' ', 80));
+            Console.SetCursorPosition(0, currentY);
+        }
+
+
 
         public static void CreateNewFile(Student student)
         {
