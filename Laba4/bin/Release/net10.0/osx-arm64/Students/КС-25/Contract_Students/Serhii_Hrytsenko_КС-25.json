@@ -1,0 +1,22 @@
+{
+  "Name": "Serhii",
+  "Surname": "Hrytsenko",
+  "Gender": "Male",
+  "BirthDate": "2004-07-19",
+  "Age": 21,
+  "Course": "3",
+  "Group": "КС-25",
+  "Grades": {
+    "Advanced C#": 92,
+    "ASP.NET": 97,
+    "LINQ": 73,
+    "Software Engineering": 78,
+    "AI Basics": 83,
+    "Cybersecurity": 88
+  },
+  "AverageGrade": 85.17,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": true,
+  "Password": ""
+}

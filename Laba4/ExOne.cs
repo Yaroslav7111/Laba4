@@ -277,42 +277,17 @@ public static string MyTimeToString(MyTime t)
     return $"{t.hour:D1}:{t.min:D2}:{t.sec:D2}";
 }
 //Це для того шо час не віходив за межі  
+
 public static MyTime Normalize(MyTime t)
 {
-   if (t.sec >= 60)
-    {
-        t.min += t.sec / 60;
-        t.sec = t.sec % 60;
-    }
-    else if (t.sec < 0)
-    {
-        int borrow = (-t.sec + 59) / 60;
-        t.min -= borrow;
-        t.sec += borrow * 60;
-    }
+    int totalSeconds = ToSecSinceMidnight(t);
 
-    if (t.min >= 60)
-    {
-        t.hour += t.min / 60;
-        t.min = t.min % 60;
-    }
-    else if (t.min < 0)
-    {
-        int borrow = (-t.min + 59) / 60;
-        t.hour -= borrow;
-        t.min += borrow * 60;
-    }
+    totalSeconds %= 86400;
 
-    if (t.hour >= 24)
-    {
-        t.hour = t.hour % 24;
-    }
-    else if (t.hour < 0)
-    {
-        t.hour = (t.hour % 24 + 24) % 24;
-    }
+    if (totalSeconds < 0)
+        totalSeconds += 86400;
 
-    return t;
+    return FromSecSinceMidnight(totalSeconds);
 }
 // Ця функція перетворює час у форматі MyTime (години, хвилини, секунди) у кількість секунд, що минули з півночі
 public static int ToSecSinceMidnight(MyTime t)

@@ -1,0 +1,22 @@
+{
+  "Name": "Ivan",
+  "Surname": "Petrenko",
+  "Gender": "Male",
+  "BirthDate": "2009-05-07",
+  "Age": 17,
+  "Course": "1",
+  "Group": "КН-25",
+  "Grades": {
+    "Math I": 96,
+    "Physics I": 72,
+    "Programming Basics": 77,
+    "English": 82,
+    "History": 87,
+    "Discrete Math": 92
+  },
+  "AverageGrade": 84.33,
+  "StudyType": "Budget",
+  "Scholarship": 1500,
+  "CanEdit": true,
+  "Password": "pass21"
+}

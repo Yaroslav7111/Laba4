@@ -1,0 +1,22 @@
+{
+  "Name": "Vlad",
+  "Surname": "Tkachenko",
+  "Gender": "Male",
+  "BirthDate": "2005-05-01",
+  "Age": 21,
+  "Course": "1",
+  "Group": "КН-25",
+  "Grades": {
+    "Math I": 90,
+    "Physics I": 95,
+    "Programming Basics": 100,
+    "English": 76,
+    "History": 81,
+    "Discrete Math": 86
+  },
+  "AverageGrade": 88.0,
+  "StudyType": "Budget",
+  "Scholarship": 2500,
+  "CanEdit": true,
+  "Password": "pass33"
+}

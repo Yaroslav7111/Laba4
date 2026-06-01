@@ -1,0 +1,22 @@
+{
+  "Name": "Bohdan",
+  "Surname": "Petrenko",
+  "Gender": "Male",
+  "BirthDate": "2009-07-14",
+  "Age": 16,
+  "Course": "3",
+  "Group": "КС-25",
+  "Grades": {
+    "Advanced C#": 96,
+    "ASP.NET": 72,
+    "LINQ": 77,
+    "Software Engineering": 82,
+    "AI Basics": 87,
+    "Cybersecurity": 92
+  },
+  "AverageGrade": 84.33,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": true,
+  "Password": ""
+}

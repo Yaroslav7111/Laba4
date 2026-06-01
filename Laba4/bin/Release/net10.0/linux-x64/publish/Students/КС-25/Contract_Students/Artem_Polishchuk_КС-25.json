@@ -1,0 +1,22 @@
+{
+  "Name": "Artem",
+  "Surname": "Polishchuk",
+  "Gender": "Male",
+  "BirthDate": "2008-07-25",
+  "Age": 17,
+  "Course": "3",
+  "Group": "КС-25",
+  "Grades": {
+    "Advanced C#": 98,
+    "ASP.NET": 74,
+    "LINQ": 79,
+    "Software Engineering": 84,
+    "AI Basics": 89,
+    "Cybersecurity": 94
+  },
+  "AverageGrade": 86.33,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": true,
+  "Password": ""
+}

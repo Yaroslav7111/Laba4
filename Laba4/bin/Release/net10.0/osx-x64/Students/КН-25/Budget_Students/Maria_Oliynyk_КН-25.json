@@ -1,0 +1,22 @@
+{
+  "Name": "Maria",
+  "Surname": "Oliynyk",
+  "Gender": "Female",
+  "BirthDate": "2009-02-08",
+  "Age": 17,
+  "Course": "4",
+  "Group": "КН-25",
+  "Grades": {
+    "Diploma Project": 78,
+    "Practice": 83,
+    "System Design": 88,
+    "Cloud Basics": 93,
+    "DevOps": 98,
+    "Final Exam Prep": 74
+  },
+  "AverageGrade": 85.67,
+  "StudyType": "Budget",
+  "Scholarship": 2500,
+  "CanEdit": false,
+  "Password": ""
+}

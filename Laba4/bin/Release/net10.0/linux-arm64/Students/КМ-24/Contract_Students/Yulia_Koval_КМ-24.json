@@ -1,0 +1,22 @@
+{
+  "Name": "Yulia",
+  "Surname": "Koval",
+  "Gender": "Female",
+  "BirthDate": "2009-06-03",
+  "Age": 16,
+  "Course": "4",
+  "Group": "КМ-24",
+  "Grades": {
+    "Diploma Project": 100,
+    "Practice": 76,
+    "System Design": 81,
+    "Cloud Basics": 86,
+    "DevOps": 91,
+    "Final Exam Prep": 96
+  },
+  "AverageGrade": 88.33,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": false,
+  "Password": ""
+}

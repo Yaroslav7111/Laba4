@@ -1,0 +1,22 @@
+{
+  "Name": "Pavlo",
+  "Surname": "Savchenko",
+  "Gender": "Male",
+  "BirthDate": "2009-11-09",
+  "Age": 16,
+  "Course": "3",
+  "Group": "КН-25",
+  "Grades": {
+    "Advanced C#": 89,
+    "ASP.NET": 94,
+    "LINQ": 99,
+    "Software Engineering": 75,
+    "AI Basics": 80,
+    "Cybersecurity": 85
+  },
+  "AverageGrade": 87.0,
+  "StudyType": "Budget",
+  "Scholarship": 2500,
+  "CanEdit": true,
+  "Password": ""
+}

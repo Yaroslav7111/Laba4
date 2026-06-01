@@ -1,0 +1,22 @@
+{
+  "Name": "Sofia",
+  "Surname": "Lysenko",
+  "Gender": "Female",
+  "BirthDate": "2005-08-27",
+  "Age": 20,
+  "Course": "2",
+  "Group": "КН-25",
+  "Grades": {
+    "Math II": 79,
+    "OOP": 84,
+    "Algorithms": 89,
+    "Database": 94,
+    "Web Dev": 99,
+    "Operating Systems": 75
+  },
+  "AverageGrade": 86.67,
+  "StudyType": "Budget",
+  "Scholarship": 2500,
+  "CanEdit": false,
+  "Password": ""
+}

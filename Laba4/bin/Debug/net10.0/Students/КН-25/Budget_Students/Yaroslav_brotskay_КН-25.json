@@ -1,0 +1,22 @@
+{
+  "Name": "Yaroslav",
+  "Surname": "brotskay",
+  "Gender": "Male",
+  "BirthDate": "2008-09-12T00:00:00",
+  "Age": 17,
+  "Course": "3",
+  "Group": "\u041A\u041D-25",
+  "Grades": {
+    "Advanced C#": 100,
+    "ASP.NET": 100,
+    "LINQ": 100,
+    "Software Engineering": 100,
+    "AI Basics": 100,
+    "Cybersecurity": 100
+  },
+  "AverageGrade": 100,
+  "StudyType": "Budget",
+  "Scholarship": 3500,
+  "CanEdit": true,
+  "Password": "yros34"
+}

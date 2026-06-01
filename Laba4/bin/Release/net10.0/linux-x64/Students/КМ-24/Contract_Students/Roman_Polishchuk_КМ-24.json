@@ -1,0 +1,22 @@
+{
+  "Name": "Roman",
+  "Surname": "Polishchuk",
+  "Gender": "Male",
+  "BirthDate": "2005-09-23",
+  "Age": 20,
+  "Course": "1",
+  "Group": "КМ-24",
+  "Grades": {
+    "Math I": 83,
+    "Physics I": 92,
+    "Programming Basics": 93,
+    "English": 98,
+    "History": 74,
+    "Discrete Math": 79
+  },
+  "AverageGrade": 86.5,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": true,
+  "Password": "pass57"
+}

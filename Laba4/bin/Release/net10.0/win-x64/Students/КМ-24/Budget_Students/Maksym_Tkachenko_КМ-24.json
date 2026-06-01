@@ -1,0 +1,22 @@
+{
+  "Name": "Maksym",
+  "Surname": "Tkachenko",
+  "Gender": "Male",
+  "BirthDate": "2005-03-21",
+  "Age": 21,
+  "Course": "3",
+  "Group": "КМ-24",
+  "Grades": {
+    "Advanced C#": 90,
+    "ASP.NET": 95,
+    "LINQ": 100,
+    "Software Engineering": 76,
+    "AI Basics": 81,
+    "Cybersecurity": 86
+  },
+  "AverageGrade": 88.0,
+  "StudyType": "Budget",
+  "Scholarship": 2500,
+  "CanEdit": true,
+  "Password": ""
+}

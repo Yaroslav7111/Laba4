@@ -1,0 +1,22 @@
+{
+  "Name": "Kate",
+  "Surname": "Ananasovna",
+  "Gender": "Female",
+  "BirthDate": "2004-01-12",
+  "Age": 17,
+  "Course": "1",
+  "Group": "КM-24",
+  "Grades": {
+    "Math I": 100,
+    "Physics I": 100,
+    "Programming Basics": 100,
+    "English": 100,
+    "History": 100,
+    "Discrete Math": 100
+  },
+  "AverageGrade": 100,
+  "StudyType": "Budget",
+  "Scholarship": 125000,
+  "CanEdit": false,
+  "Password": ""
+}

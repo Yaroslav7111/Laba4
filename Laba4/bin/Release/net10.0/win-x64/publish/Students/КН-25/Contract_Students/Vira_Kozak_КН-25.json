@@ -1,0 +1,22 @@
+{
+  "Name": "Vira",
+  "Surname": "Kozak",
+  "Gender": "Female",
+  "BirthDate": "2005-02-02",
+  "Age": 21,
+  "Course": "4",
+  "Group": "КН-25",
+  "Grades": {
+    "Diploma Project": 72,
+    "Practice": 77,
+    "System Design": 82,
+    "Cloud Basics": 87,
+    "DevOps": 92,
+    "Final Exam Prep": 97
+  },
+  "AverageGrade": 84.5,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": false,
+  "Password": ""
+}

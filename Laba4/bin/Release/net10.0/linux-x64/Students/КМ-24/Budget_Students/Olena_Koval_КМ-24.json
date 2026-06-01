@@ -1,0 +1,22 @@
+{
+  "Name": "Olena",
+  "Surname": "Koval",
+  "Gender": "Female",
+  "BirthDate": "2003-12-17",
+  "Age": 22,
+  "Course": "2",
+  "Group": "КМ-24",
+  "Grades": {
+    "Math II": 76,
+    "OOP": 81,
+    "Algorithms": 86,
+    "Database": 91,
+    "Web Dev": 96,
+    "Operating Systems": 72
+  },
+  "AverageGrade": 83.67,
+  "StudyType": "Budget",
+  "Scholarship": 1500,
+  "CanEdit": false,
+  "Password": ""
+}

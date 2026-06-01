@@ -1,0 +1,22 @@
+{
+  "Name": "Nadia",
+  "Surname": "Lysenko",
+  "Gender": "Female",
+  "BirthDate": "2003-06-19",
+  "Age": 22,
+  "Course": "4",
+  "Group": "КМ-24",
+  "Grades": {
+    "Diploma Project": 98,
+    "Practice": 74,
+    "System Design": 79,
+    "Cloud Basics": 84,
+    "DevOps": 89,
+    "Final Exam Prep": 94
+  },
+  "AverageGrade": 86.33,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": false,
+  "Password": ""
+}

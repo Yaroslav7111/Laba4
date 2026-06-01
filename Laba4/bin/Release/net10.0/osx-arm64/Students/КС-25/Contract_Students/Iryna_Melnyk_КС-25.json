@@ -1,0 +1,22 @@
+{
+  "Name": "Iryna",
+  "Surname": "Melnyk",
+  "Gender": "Female",
+  "BirthDate": "2008-04-26",
+  "Age": 18,
+  "Course": "2",
+  "Group": "КС-25",
+  "Grades": {
+    "Math II": 80,
+    "OOP": 85,
+    "Algorithms": 90,
+    "Database": 95,
+    "Web Dev": 100,
+    "Operating Systems": 76
+  },
+  "AverageGrade": 87.67,
+  "StudyType": "Contract",
+  "Scholarship": 0,
+  "CanEdit": false,
+  "Password": ""
+}

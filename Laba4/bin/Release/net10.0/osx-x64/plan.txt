@@ -1,0 +1,116 @@
+Monday|sleep| |free time|00:00:00|04:59:59
+Monday|wake up| |free time|05:00:00|05:10:00
+Monday|breakfast| |meal|05:10:01|05:30:00
+Monday|doing housework| |free time|05:30:01|06:25:00
+Monday|wolk| |free time|06:25:01|06:29:59
+Monday|ride University| |free time|06:35:00|07:15:00
+Monday|wolk| |free time|07:15:01|07:59:59
+Monday|Math|1 lesson|lecture|08:00:00|09:20:00
+Monday|PALM|2 lesson|practice|09:40:00|11:00:00
+Monday|English|3 lesson|seminar|11:20:00|12:40:00
+Monday|ride home| |free time|13:30:00|14:20:00
+Monday|wolk| |free time|13:20:01|13:30:00
+Monday|rest| |free time|13:30:01|14:30:00
+Monday|lunch| |meal|14:30:01|14:44:59
+Monday|coding| |work|14:45:01|21:30:00  
+Monday|dinner| |meal|21:30:01|21:40:00
+Monday|getting ready for bed| |free time|21:40:01|21:59:59
+Monday|sleep| |free time|22:00:00|23:59:59
+
+Tuesday|sleep| |free time|00:00:00|04:59:59
+Tuesday|wake up| |free time|05:00:00|05:10:00
+Tuesday|breakfast| |meal|05:10:01|05:30:00
+Tuesday|doing housework| |free time|05:30:01|06:25:00
+Tuesday|wolk| |free time|06:25:01|06:29:59
+Tuesday|ride University| |free time|06:35:00|07:15:00
+Tuesday|wolk| |free time|07:15:01|07:59:59
+Tuesday|training| |sport|08:00:00|09:00:00
+Tuesday|History|2 lesson|seminar|09:20:00|10:40:00
+Tuesday|English|3 lesson|seminar|11:00:00|12:20:00
+Tuesday|ride home| |free time|13:30:00|14:20:00
+Tuesday|wolk| |free time|13:20:01|13:30:00
+Tuesday|rest| |free time|13:30:01|14:30:00
+Tuesday|lunch| |meal|14:30:01|14:44:59
+Tuesday|coding| |work|14:45:01|21:30:00
+Tuesday|dinner| |meal|21:30:01|21:40:00
+Tuesday|getting ready for bed| |free time|21:40:01|21:59:59
+Tuesday|sleep| |free time|22:00:00|23:59:59
+
+Wednesday|sleep| |free time|00:00:00|04:59:59
+Wednesday|wake up| |free time|05:00:00|05:10:00
+Wednesday|breakfast| |meal|05:10:01|05:30:00
+Wednesday|doing housework| |free time|05:30:01|06:25:00
+Wednesday|wolk| |free time|06:25:01|06:29:59
+Wednesday|ride University| |free time|06:35:00|07:15:00
+Wednesday|wolk| |free time|07:15:01|07:59:59
+Wednesday|training| |sport|08:00:00|09:00:00
+Wednesday|Physics|2 lesson|lecture|09:20:00|10:40:00
+Wednesday|Physics|3 lesson|practice|11:00:00|12:20:00
+Wednesday|ride home| |free time|13:30:00|14:20:00
+Wednesday|wolk| |free time|13:20:01|13:30:00
+Wednesday|rest| |free time|13:30:01|14:30:00
+Wednesday|lunch| |meal|14:30:01|14:44:59
+Wednesday|coding| |work|14:45:01|21:30:00
+Wednesday|dinner| |meal|21:30:01|21:40:00
+Wednesday|getting ready for bed| |free time|21:40:01|21:59:59
+Wednesday|sleep| |free time|22:00:00|23:59:59
+
+Thursday|sleep| |free time|00:00:00|04:59:59
+Thursday|wake up| |free time|05:00:00|05:10:00
+Thursday|breakfast| |meal|05:10:01|05:30:00
+Thursday|doing housework| |free time|05:30:01|06:25:00
+Thursday|wolk| |free time|06:25:01|06:29:59
+Thursday|ride| |free time|06:35:00|07:15:00
+Thursday|wolk| |free time|07:15:01|07:59:59
+Thursday|Training|1 lesson|sport|08:00:00|09:00:00
+Thursday|ride home| |free time|09:20:00|10:00:00
+Thursday|lunch| |meal|10:00:01|10:30:00
+Thursday|rest| |free time|10:30:01|14:44:00
+Thursday|coding| |work|14:45:01|21:30:00
+Thursday|dinner| |meal|21:30:01|21:40:00
+Thursday|getting ready for bed| |free time|21:40:01|21:59:59
+Thursday|sleep| |free time|22:00:00|23:59:59
+
+Friday|sleep| |free time|00:00:00|04:59:59
+Friday|wake up| |free time|05:00:00|05:10:00
+Friday|breakfast| |meal|05:10:01|05:30:00
+Friday|doing housework| |free time|05:30:01|06:25:00
+Friday|wolk| |free time|06:25:01|06:29:59
+Friday|ride University| |free time|06:35:00|07:15:00
+Friday|wolk| |free time|07:15:01|07:59:59
+Friday|training| |sport|08:00:00|09:00:00
+Friday|PALM|2 lesson|practice|09:20:00|10:40:00
+Friday|PALM|3 lesson|practice|11:00:00|12:20:00
+Friday|ride home| |free time|13:30:00|14:20:00
+Friday|wolk| |free time|13:20:01|13:30:00
+Friday|rest| |free time|13:30:01|14:30:00
+Friday|lunch| |meal|14:30:01|14:44:59
+Friday|coding| |work|14:45:01|21:30:00
+Friday|dinner| |meal|21:30:01|21:40:00
+Friday|getting ready for bed| |free time|21:40:01|21:59:59
+Friday|sleep| |free time|22:00:00|23:59:59
+
+Saturday|sleep| |free time|00:00:00|06:59:59
+Saturday|wake up| |free time|07:00:00|07:10:00
+Saturday|breakfast| |meal|07:10:01|07:40:00
+Saturday|doing housework| |free time|07:40:01|09:30:00
+Saturday|free time| |free time|09:30:01|12:30:00
+Saturday|lunch| |meal|12:30:01|13:00:00
+Saturday|rest| |free time|13:00:01|14:30:00
+Saturday|free time| |free time|14:30:01|18:00:00
+Saturday|dinner| |meal|18:00:01|18:30:00
+Saturday|relax | |free time|18:30:01|21:30:00
+Saturday|getting ready for bed| |free time|21:30:01|21:59:59
+Saturday|sleep| |free time|22:00:00|23:59:59
+
+Sunday|sleep| |free time|00:00:00|06:59:59
+Sunday|wake up| |free time|07:00:00|07:10:00
+Sunday|breakfast| |meal|07:10:01|07:40:00
+Sunday|doing housework| |free time|07:40:01|08:30:00
+Sunday|coding| |work|08:30:01|12:30:00
+Sunday|lunch| |meal|12:30:01|13:00:00
+Sunday|rest| |free time|13:00:01|14:00:00
+Sunday|coding| |work|14:00:01|21:30:00
+Sunday|dinner| |meal|21:30:01|21:40:00
+Sunday|getting ready for bed| |free time|21:40:01|21:59:59
+Sunday|sleep| |free time|22:00:00|23:59:59

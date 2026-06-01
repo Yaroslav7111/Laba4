@@ -1,0 +1,22 @@
+{
+  "Name": "Dmytro",
+  "Surname": "Savchenko",
+  "Gender": "Male",
+  "BirthDate": "2004-01-17",
+  "Age": 22,
+  "Course": "1",
+  "Group": "КС-25",
+  "Grades": {
+    "Math I": 99,
+    "Physics I": 75,
+    "Programming Basics": 80,
+    "English": 85,
+    "History": 90,
+    "Discrete Math": 95
+  },
+  "AverageGrade": 87.33,
+  "StudyType": "Budget",
+  "Scholarship": 2500,
+  "CanEdit": true,
+  "Password": "pass05"
+}

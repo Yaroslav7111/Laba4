@@ -1,0 +1,22 @@
+{
+  "Name": "Anna",
+  "Surname": "Melnyk",
+  "Gender": "Female",
+  "BirthDate": "2007-06-25",
+  "Age": 18,
+  "Course": "4",
+  "Group": "КМ-24",
+  "Grades": {
+    "Diploma Project": 75,
+    "Practice": 80,
+    "System Design": 85,
+    "Cloud Basics": 90,
+    "DevOps": 95,
+    "Final Exam Prep": 100
+  },
+  "AverageGrade": 87.5,
+  "StudyType": "Budget",
+  "Scholarship": 2500,
+  "CanEdit": false,
+  "Password": ""
+}
